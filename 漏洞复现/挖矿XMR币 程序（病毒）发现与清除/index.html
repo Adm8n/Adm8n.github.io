@@ -1,0 +1,1787 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../shiro%20%E5%8E%86%E5%8F%B2%E7%89%88%E6%9C%AC%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/">
+      
+      
+        <link rel="next" href="../%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.9">
+    
+    
+      
+        <title>挖矿XMR币程序（病毒）发现与清除 - Adm8nの知识库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.f2e4d321.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+Simplified+Chinese:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Noto Sans Simplified Chinese";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#xmr" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="Adm8nの知识库" class="md-header__button md-logo" aria-label="Adm8nの知识库" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Adm8nの知识库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              挖矿XMR币程序（病毒）发现与清除
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9h-1.9M20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69m-9.15 3.96h2.3L12 9l-1.15 3.65Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Adm8nの知识库" class="md-nav__button md-logo" aria-label="Adm8nの知识库" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    Adm8nの知识库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Welcome to MkDocs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    OKR
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            OKR
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../OKR/%E7%9B%AE%E6%A0%87%E7%AE%A1%E7%90%86%E6%B3%95%20OKR/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    目标管理法 OKR
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    内网小姿势
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            内网小姿势
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%86%85%E7%BD%91%E5%B0%8F%E5%A7%BF%E5%8A%BF/Ettercap%E5%AE%9E%E7%8E%B0%E5%86%85%E7%BD%91%E5%8A%AB%E6%8C%81%E7%9B%AE%E6%A0%87%E4%B8%BB%E6%9C%BADNS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ettercap实现内网劫持目标主机DNS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%86%85%E7%BD%91%E5%B0%8F%E5%A7%BF%E5%8A%BF/Zerotier%E7%BB%84%E7%BD%91/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Zerotier组网
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%86%85%E7%BD%91%E5%B0%8F%E5%A7%BF%E5%8A%BF/kali%E5%AE%9E%E7%8E%B0Cookie%E4%BC%9A%E8%AF%9D%E5%8A%AB%E6%8C%81/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    kali实现Cookie会话劫持
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%86%85%E7%BD%91%E5%B0%8F%E5%A7%BF%E5%8A%BF/%E5%9F%9F%E6%B8%97%E9%80%8F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%BA%8C/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    域渗透基础知识二
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    启明星辰溯源工程师
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            启明星辰溯源工程师
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%90%AF%E6%98%8E%E6%98%9F%E8%BE%B0%E6%BA%AF%E6%BA%90%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AC%AC%E4%B8%89%E7%AB%A0%2001%20Web%20%E5%AE%89%E5%85%A8%E7%9B%91%E6%B5%8B%E4%B8%8E%E5%88%86%E6%9E%90/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    第三章 01 Web 安全监测与分析
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    安全杂七杂八
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            安全杂七杂八
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%AE%89%E5%85%A8%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/Hadoop%20%E9%83%A8%E7%BD%B2%E4%B8%8E%E4%BD%BF%E7%94%A8/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Hadoop 部署与使用
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%AE%89%E5%85%A8%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/MySQL%E5%BA%93%E8%A1%A8%E4%B8%8ESQL%E8%AF%AD%E5%8F%A5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MySQL库表与SQL语句
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%AE%89%E5%85%A8%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/PHP%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%85%A5%E9%97%A8/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PHP序列化与反序列化入门
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%AE%89%E5%85%A8%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/Win%E5%9F%9F%E6%8E%A7%E4%B8%8E%E7%8C%8E%E9%B9%B0%E7%BB%88%E7%AB%AF%E5%AE%89%E5%85%A8%E7%AE%A1%E7%90%86EDR/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Win域控与猎鹰终端安全管理EDR
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%AE%89%E5%85%A8%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/%E5%A4%A9%E6%B4%A5%E5%88%9D%E7%BA%A7%E5%B8%82%E8%B5%9B%E8%A7%A3%E9%A2%98%E9%83%A8%E5%88%86/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2023年datacon初级赛解题部分
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%AE%89%E5%85%A8%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/%E5%B8%B8%E8%A7%81%E7%9A%84webshell%E5%B7%A5%E5%85%B7%E6%B5%81%E9%87%8F%E7%89%B9%E5%BE%81%E5%88%86%E6%9E%90/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    常见 webshell 工具流量特征分析
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%AE%89%E5%85%A8%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%9C%AF%E8%AF%AD/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    网络安全术语
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%AE%89%E5%85%A8%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/%E8%AF%AD%E9%9B%80%E5%9B%BE%E5%BA%8A%E8%BF%81%E7%A7%BB%E9%97%AE%E9%A2%98/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    正则表达式匹配语雀图片下载卡顿问题
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%AE%89%E5%85%A8%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/%E9%95%BF%E4%BA%AD%E9%9B%B7%E6%B1%A0%E7%A4%BE%E5%8C%BA%E7%89%88%E6%9C%AC%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    长亭雷池社区版本安装与使用
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%AE%89%E5%85%A8%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/%E9%BB%91%E5%AE%A2%E4%B8%8E%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF%E6%8C%87%E5%8D%97/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    黑客与安全技术指南(第4章 代码审计)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    权限提升
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            权限提升
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/Windows%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87%E2%80%94MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8F%90%E6%9D%83/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Windows权限提升—MySQL数据库提权
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/windows%20%E6%8F%90%E6%9D%83%E2%80%94%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8F%90%E6%9D%83/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Windows 提权——数据库提权
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    权限提升介绍
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    漏洞复现
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            漏洞复现
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../HIKVISION%20%E7%BB%BC%E5%90%88%E5%AE%89%E9%98%B2%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    HIKVISION 综合安防管理平台任意文件上传
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Redis%20%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E6%B8%97%E9%80%8F%E4%B9%8B%E6%97%85/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Redis 未授权访问渗透之旅
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Win10%E6%B0%B8%E6%81%92%E4%B9%8B%E9%BB%91CVE-2020-0796%E5%A4%8D%E7%8E%B0shell/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Win10永恒之黑CVE-2020-0796复现shell
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../WinRAR%200day%E6%BC%8F%E6%B4%9ECVE-2023-38831%E5%A4%8D%E7%8E%B0%E6%9C%80%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    WinRAR 0day漏洞CVE-2023-38831复现最详解
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../log4j2%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90%E5%8F%8A%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B01/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Log4j2原理分析及漏洞复现1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../log4j2%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B02/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    log4j2漏洞复现2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shiro%20%E5%8E%86%E5%8F%B2%E7%89%88%E6%9C%AC%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Shiro 历史版本漏洞复现
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    挖矿XMR币程序（病毒）发现与清除
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    挖矿XMR币程序（病毒）发现与清除
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#idc" class="md-nav__link">
+    <span class="md-ellipsis">
+      IDC服务商启动告警
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="IDC服务商启动告警">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#idc_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      IDC服务器厂商会立即通知存在 恶意文件挖矿程序告警。
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xmrig" class="md-nav__link">
+    <span class="md-ellipsis">
+      常见的挖矿程序：xmrig 介绍
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      模拟挖矿失陷主机 实战
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="模拟挖矿失陷主机 实战">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a" class="md-nav__link">
+    <span class="md-ellipsis">
+      A. 查看进程
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      查找进程执行文件
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      杀死进程
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#crontab" class="md-nav__link">
+    <span class="md-ellipsis">
+      可能存在crontab 计划任务
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="可能存在crontab 计划任务">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      查看定时任务
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vim-etccrontab" class="md-nav__link">
+    <span class="md-ellipsis">
+      vim /etc/crontab
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#crond" class="md-nav__link">
+    <span class="md-ellipsis">
+      全局搜索crond配置文件
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#varspoolcron" class="md-nav__link">
+    <span class="md-ellipsis">
+      删除 /var/spool/cron 中的数据
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#crondservice-crond-restart" class="md-nav__link">
+    <span class="md-ellipsis">
+      重启crond服务：service crond restart
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      流量告警 挖矿程序报警研判
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      免责声明
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    永恒之蓝(ms_017)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%B5%B7%E5%BA%B7%E5%A8%81%E8%A7%86isecure%20center%20%E7%BB%BC%E5%90%88%E5%AE%89%E9%98%B2%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0%E5%AD%98%E5%9C%A8%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    海康威视isecure center综合安防管理平台存在任意文件上传漏洞
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E7%94%A8%E5%8F%8B-NC-Cloud%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    用友-NC-Cloud远程代码执行
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E7%BD%91%E7%A5%9ESecGate3600%20%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    网神SecGate3600 文件上传
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    网络协议分析
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            网络协议分析
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90/HTTPS%20%20TLSv1.3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    HTTPS && HTTPS 协议分析
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#idc" class="md-nav__link">
+    <span class="md-ellipsis">
+      IDC服务商启动告警
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="IDC服务商启动告警">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#idc_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      IDC服务器厂商会立即通知存在 恶意文件挖矿程序告警。
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xmrig" class="md-nav__link">
+    <span class="md-ellipsis">
+      常见的挖矿程序：xmrig 介绍
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      模拟挖矿失陷主机 实战
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="模拟挖矿失陷主机 实战">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a" class="md-nav__link">
+    <span class="md-ellipsis">
+      A. 查看进程
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      查找进程执行文件
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      杀死进程
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#crontab" class="md-nav__link">
+    <span class="md-ellipsis">
+      可能存在crontab 计划任务
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="可能存在crontab 计划任务">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      查看定时任务
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vim-etccrontab" class="md-nav__link">
+    <span class="md-ellipsis">
+      vim /etc/crontab
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#crond" class="md-nav__link">
+    <span class="md-ellipsis">
+      全局搜索crond配置文件
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#varspoolcron" class="md-nav__link">
+    <span class="md-ellipsis">
+      删除 /var/spool/cron 中的数据
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#crondservice-crond-restart" class="md-nav__link">
+    <span class="md-ellipsis">
+      重启crond服务：service crond restart
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      流量告警 挖矿程序报警研判
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      免责声明
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="xmr">挖矿XMR币程序（病毒）发现与清除<a class="headerlink" href="#xmr" title="Permanent link">&para;</a></h1>
+<p>学习文章与资源：
+<a href="https://blog.csdn.net/weixin_51590879/article/details/126699413?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522168792463116800211537557%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=168792463116800211537557&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-2-126699413-null-null.142^v88^control_2,239^v2^insert_chatgpt&amp;utm_term=%E6%8A%A4%E7%BD%91%E4%B8%AD%E5%91%8A%E8%AD%A6%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90&amp;spm=1018.2226.3001.4187">流量告警分析思路_护网过程中,如果安全设备来了大量的流量告警,你如何快速对告警进行降噪处理?</a></p>
+<p><a href="https://github.com/C3Pool">C3Pool - Overview</a></p>
+<p><a href="https://blog.csdn.net/xixiyuguang/article/details/109844377">xmrig挖矿病毒解决_xmrigminer_xixiyuguang的博客-CSDN博客</a></p>
+<h2 id="idc">IDC服务商启动告警<a class="headerlink" href="#idc" title="Permanent link">&para;</a></h2>
+<h3 id="idc_1">IDC服务器厂商会立即通知存在 恶意文件挖矿程序告警。<a class="headerlink" href="#idc_1" title="Permanent link">&para;</a></h3>
+<p><img alt="image.png" src="https://s2.loli.net/2023/07/29/TfwnbcoIQHzOyKU.png" />
+<img alt="image.png" src="https://s2.loli.net/2023/07/29/VjRAQYEmGzwobnI.png" /></p>
+<h2 id="xmrig">常见的挖矿程序：xmrig 介绍<a class="headerlink" href="#xmrig" title="Permanent link">&para;</a></h2>
+<p>挖取货币为<a href="https://www.getmonero.org/zh-cn/index.html">门罗币</a>（XMR），本货币比较不吃资源，CPU GPU都可挖取。</p>
+<p>最低门槛为0.5G内存，15GB存储,即可连接矿池进行挖矿操作。</p>
+<p>第三方矿池还提供linux和windows平台一键部署，门槛很低。</p>
+<p>github拉取xmrig压缩包，一个是配置信息config.json 和 挖矿程序 xmrig。</p>
+<p><img alt="image.png" src="https://s2.loli.net/2023/07/29/a1EymZvDdqrBTuP.png" /></p>
+<p>通过门罗币私有收款地址，实现挖取货币收益送达指定币账户中。</p>
+<ol>
+<li>单solo</li>
+<li>联合矿池挖取矿池货币奖励分成，获取利益。</li>
+</ol>
+<p>攻击者意图初步分析：利用服务器后门植入非法挖矿程序进行挖矿，从而获取虚拟币牟利。</p>
+<p>本次注册一个门罗币账户，进行模拟挖矿程序实战清除。</p>
+<p>自建靶机进行模拟挖矿程序测试，手动开启挖矿程序，开始工作，打印设备信息、矿池信息和工作状态。</p>
+<p><img alt="image.png" src="https://s2.loli.net/2023/07/29/2zTbqL6lVsihRc4.png" /></p>
+<p>通过实时监控发现，</p>
+<p>运行CPU占比直接拉满100%，内存使用率也开始升高大概20%</p>
+<p><img alt="image.png" src="https://s2.loli.net/2023/07/29/YlWZdBgteAxwTLv.png" />
+<img alt="image.png" src="https://s2.loli.net/2023/07/29/RE5Fkf13njGBydQ.png" />
+<img alt="image.png" src="https://s2.loli.net/2023/07/29/5tX6zAiM7PfSbF1.png" /></p>
+<ol>
+<li>直接登录矿池网站，读取矿机实时算力和详细信息</li>
+</ol>
+<p><img alt="image.png" src="https://s2.loli.net/2023/07/29/lhzFK829pomUauI.png" /></p>
+<ol>
+<li>算力也会根据时间的推移持续增长，会随着时间发生算力波动。</li>
+</ol>
+<p><img alt="image.png" src="https://s2.loli.net/2023/07/29/8aYDFzu9vmPy3rR.png" /></p>
+<ol>
+<li>区块工作证明记录</li>
+</ol>
+<p><img alt="image.png" src="https://s2.loli.net/2023/07/29/tQN2jVoTOrGD7LC.png" /></p>
+<ol>
+<li>矿池方 还给提供 xmrig一键脚本,不要太恶心。</li>
+</ol>
+<p><img alt="image.png" src="https://s2.loli.net/2023/07/29/XsBNmftqW3PRJz7.png" /></p>
+<h2 id="_1">模拟挖矿失陷主机 实战<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>这种行为就属于小偷行为，窃取他人服务器资源，实现获取利益。</p>
+<p>切勿模仿，以示警戒。</p>
+<h3 id="a">A. 查看进程<a class="headerlink" href="#a" title="Permanent link">&para;</a></h3>
+<p><div class="highlight"><pre><span></span><code>ps -al
+</code></pre></div>
+<img alt="image.png" src="https://s2.loli.net/2023/07/29/NGKP3EZb2Dc1m8d.png" />
+<div class="highlight"><pre><span></span><code>top 实时查看设备与进程状态。
+</code></pre></div>
+<img alt="image.png" src="https://s2.loli.net/2023/07/29/7udScC8P3ZKY9DM.png" />
+CPU占比很高。</p>
+<h3 id="_2">查找进程执行文件<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>ubuntu@VM-0-16-ubuntu:/$ ls -l /proc/94763/exe
+lrwxrwxrwx 1 ubuntu ubuntu 0 Jun 28 21:04 /proc/94763/exe -&gt; /home/lighthouse/wo/xmrig
+
+![image.png](https://s2.loli.net/2023/07/29/7eorDcKgxbsQBWS.png)
+</code></pre></div>
+<h3 id="_3">杀死进程<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p><div class="highlight"><pre><span></span><code>sudo kill -9 94763
+</code></pre></div>
+在查看就没有了</p>
+<h2 id="crontab">可能存在crontab 计划任务<a class="headerlink" href="#crontab" title="Permanent link">&para;</a></h2>
+<h3 id="_4">查看定时任务<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>crontab -l
+root@VM-0-16-ubuntu:/# crontab -l
+30 21 * * * bash /home/lighthouse/wo/xmrig
+</code></pre></div>
+<h3 id="vim-etccrontab">vim /etc/crontab<a class="headerlink" href="#vim-etccrontab" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>SHELL=/bin/bash
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+MAILTO=root
+
+# For details see man 4 crontabs
+
+# Example of job definition:
+# .---------------- minute (0 - 59)
+# |  .------------- hour (0 - 23)
+# |  |  .---------- day of month (1 - 31)
+# |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...
+# |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat
+# |  |  |  |  |
+# *  *  *  *  * user-name  command to be executed
+</code></pre></div>
+<h3 id="crond">全局搜索crond配置文件<a class="headerlink" href="#crond" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>root@VM-0-16-ubuntu:/#  find / -name cron* -type d
+/usr/share/doc/cronie-1.4.11
+**/var/spool/cron**
+/etc/cron.d
+/etc/cron.hourly
+/etc/cron.daily
+/etc/selinux/targeted/active/modules/100/cron
+/etc/cron.weekly
+/etc/cron.monthly
+/sys/fs/cgroup/devices/system.slice/crond.service
+/sys/fs/cgroup/systemd/system.slice/crond.service
+root# cd /var/spool/cron/
+ls -l * 
+</code></pre></div>
+<h3 id="varspoolcron">删除 /var/spool/cron 中的数据<a class="headerlink" href="#varspoolcron" title="Permanent link">&para;</a></h3>
+<h3 id="crondservice-crond-restart">重启crond服务：service crond restart<a class="headerlink" href="#crondservice-crond-restart" title="Permanent link">&para;</a></h3>
+<p>达到清楚挖矿程序的目的。</p>
+<h2 id="_5"><strong>流量告警 挖矿程序报警研判</strong><a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<p>攻击者意图初步分析：利用服务器后门植入非法挖矿程序进行挖矿，从而获取虚拟币牟利。</p>
+<p>威胁分析标签：数据方向多为内到外</p>
+<p>1.挖矿的报警，是根据传输的内容特征进行检测的，有2类，一类是登录到矿池（method“:”login“）、一类是从矿池接收任务（”method“:”job“）。#method 请求方法</p>
+<ol>
+<li>利用威胁情报网站（ti.dbappsecurity.com.cn、x.threatbook.cn）对挖矿回连地址进行查询。</li>
+</ol>
+<p>3.查看详细信息，可以看到有个json结构，里面会有特殊的字段，除非正常通讯的内容和挖矿格式、内容类似，否则误报的机率较低。
+<img alt="" src="https://s2.loli.net/2023/07/29/IQFuOVDH6tnK9ak.png" /></p>
+<h2 id="_6">免责声明<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<p>免责声明：
+本文旨在分享技术复现的相关知识和信息，仅供教育、研究和合法的安全测试之用。使用者应知悉并同意，任何通过本文所提供的技术和信息进行的活动，需遵守适用的法律法规，并获得相关授权。</p>
+<p>特此声明，本文作者或发布者不对使用本文所提供的任何技术和信息导致的任何直接或间接损失、损害或法律纠纷承担责任。使用者应对其自身行为负完全责任，并自行承担相关风险。</p>
+<p>使用者在使用本文所提供的技术和信息之前，请确保已获得合适的合法授权，并遵守以下准则：</p>
+<ol>
+<li>合法使用原则：在任何情况下，禁止利用本文所涉及的技术和信息从事非法、未授权的活动，包括但不限于黑客攻击、非法入侵、未经授权的系统访问、数据篡改或窃取等。使用者应尊重他人的隐私权和知识产权，并严守法律和道德规范。</li>
+<li>授权原则：在进行任何测试、复原或演示攻击之前，确保已获得明确的合法授权。未经明确授权进行攻击或测试行为是违法的，一切后果由使用者自行承担。</li>
+<li>风险责任原则：使用者应意识到黑客技术复现存在风险，并且可能导致系统崩溃、数据丢失、业务中断或其他潜在的损害。在执行任何技术操作之前，请备份重要数据，并自行承担一切风险和责任。</li>
+<li>法律遵守原则：使用者应遵守适用的国家、地区或国际法律法规。在进行学习、实验和测试的过程中，绝不可涉及非法活动，包括但不限于窃取他人信息、破坏公共设施、恶意软件传播或侵犯知识产权等。</li>
+</ol>
+<p>请在使用本文所提供技术和信息之前，务必充分理解并接受上述责任和准则。</p>
+<p>此免责声明适用于本文提供的任何技术和信息，无论以何种方式传播或使用，使用者一旦进行相关活动即视为接受以上所有规定和责任。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.8fd75fb4.min.js"></script>
+      
+    
+  </body>
+</html>

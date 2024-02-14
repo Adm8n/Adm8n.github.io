@@ -9,21 +9,25 @@
       
       
       
+        <link rel="prev" href="../Zerotier%E7%BB%84%E7%BD%91/">
       
       
-      <link rel="icon" href="/assets/images/favicon.png">
+        <link rel="next" href="../%E5%9F%9F%E6%B8%97%E9%80%8F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%BA%8C/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.9">
     
     
       
-        <title>Adm8nの知识库</title>
+        <title>kali实现Cookie会话劫持 - Adm8nの知识库</title>
       
     
     
-      <link rel="stylesheet" href="/assets/stylesheets/main.f2e4d321.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.f2e4d321.min.css">
       
         
-        <link rel="stylesheet" href="/assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -42,7 +46,7 @@
       
     
     
-    <script>__md_scope=new URL("/",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -67,6 +71,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#kalicookie" class="md-skip">
+          跳转至
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -79,9 +88,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="页眉">
-    <a href="/." title="Adm8nの知识库" class="md-header__button md-logo" aria-label="Adm8nの知识库" data-md-component="logo">
+    <a href="../.." title="Adm8nの知识库" class="md-header__button md-logo" aria-label="Adm8nの知识库" data-md-component="logo">
       
-  <img src="/assets/logo.png" alt="logo">
+  <img src="../../assets/logo.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -98,7 +107,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              
+              kali实现Cookie会话劫持
             
           </span>
         </div>
@@ -209,9 +218,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="/." title="Adm8nの知识库" class="md-nav__button md-logo" aria-label="Adm8nの知识库" data-md-component="logo">
+    <a href="../.." title="Adm8nの知识库" class="md-nav__button md-logo" aria-label="Adm8nの知识库" data-md-component="logo">
       
-  <img src="/assets/logo.png" alt="logo">
+  <img src="../../assets/logo.png" alt="logo">
 
     </a>
     Adm8nの知识库
@@ -226,7 +235,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -281,7 +290,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/OKR/%E7%9B%AE%E6%A0%87%E7%AE%A1%E7%90%86%E6%B3%95%20OKR/" class="md-nav__link">
+      <a href="../../OKR/%E7%9B%AE%E6%A0%87%E7%AE%A1%E7%90%86%E6%B3%95%20OKR/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -306,17 +315,19 @@
       
   
   
+    
   
   
+  
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
@@ -330,7 +341,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             内网小姿势
@@ -344,7 +355,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/%E5%86%85%E7%BD%91%E5%B0%8F%E5%A7%BF%E5%8A%BF/Ettercap%E5%AE%9E%E7%8E%B0%E5%86%85%E7%BD%91%E5%8A%AB%E6%8C%81%E7%9B%AE%E6%A0%87%E4%B8%BB%E6%9C%BADNS/" class="md-nav__link">
+      <a href="../Ettercap%E5%AE%9E%E7%8E%B0%E5%86%85%E7%BD%91%E5%8A%AB%E6%8C%81%E7%9B%AE%E6%A0%87%E4%B8%BB%E6%9C%BADNS/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -365,7 +376,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/%E5%86%85%E7%BD%91%E5%B0%8F%E5%A7%BF%E5%8A%BF/Zerotier%E7%BB%84%E7%BD%91/" class="md-nav__link">
+      <a href="../Zerotier%E7%BB%84%E7%BD%91/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -383,10 +394,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="/%E5%86%85%E7%BD%91%E5%B0%8F%E5%A7%BF%E5%8A%BF/kali%E5%AE%9E%E7%8E%B0Cookie%E4%BC%9A%E8%AF%9D%E5%8A%AB%E6%8C%81/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    kali实现Cookie会话劫持
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -395,6 +426,59 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      会话劫持
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="会话劫持">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验操作
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      总结
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -407,7 +491,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/%E5%86%85%E7%BD%91%E5%B0%8F%E5%A7%BF%E5%8A%BF/%E5%9F%9F%E6%B8%97%E9%80%8F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%BA%8C/" class="md-nav__link">
+      <a href="../%E5%9F%9F%E6%B8%97%E9%80%8F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%BA%8C/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -470,7 +554,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/%E5%90%AF%E6%98%8E%E6%98%9F%E8%BE%B0%E6%BA%AF%E6%BA%90%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AC%AC%E4%B8%89%E7%AB%A0%2001%20Web%20%E5%AE%89%E5%85%A8%E7%9B%91%E6%B5%8B%E4%B8%8E%E5%88%86%E6%9E%90/" class="md-nav__link">
+      <a href="../../%E5%90%AF%E6%98%8E%E6%98%9F%E8%BE%B0%E6%BA%AF%E6%BA%90%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AC%AC%E4%B8%89%E7%AB%A0%2001%20Web%20%E5%AE%89%E5%85%A8%E7%9B%91%E6%B5%8B%E4%B8%8E%E5%88%86%E6%9E%90/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -533,7 +617,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/%E5%AE%89%E5%85%A8%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/Hadoop%20%E9%83%A8%E7%BD%B2%E4%B8%8E%E4%BD%BF%E7%94%A8/" class="md-nav__link">
+      <a href="../../%E5%AE%89%E5%85%A8%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/Hadoop%20%E9%83%A8%E7%BD%B2%E4%B8%8E%E4%BD%BF%E7%94%A8/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -554,7 +638,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/%E5%AE%89%E5%85%A8%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/MySQL%E5%BA%93%E8%A1%A8%E4%B8%8ESQL%E8%AF%AD%E5%8F%A5/" class="md-nav__link">
+      <a href="../../%E5%AE%89%E5%85%A8%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/MySQL%E5%BA%93%E8%A1%A8%E4%B8%8ESQL%E8%AF%AD%E5%8F%A5/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -575,7 +659,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/%E5%AE%89%E5%85%A8%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/PHP%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%85%A5%E9%97%A8/" class="md-nav__link">
+      <a href="../../%E5%AE%89%E5%85%A8%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/PHP%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%85%A5%E9%97%A8/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -596,7 +680,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/%E5%AE%89%E5%85%A8%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/Win%E5%9F%9F%E6%8E%A7%E4%B8%8E%E7%8C%8E%E9%B9%B0%E7%BB%88%E7%AB%AF%E5%AE%89%E5%85%A8%E7%AE%A1%E7%90%86EDR/" class="md-nav__link">
+      <a href="../../%E5%AE%89%E5%85%A8%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/Win%E5%9F%9F%E6%8E%A7%E4%B8%8E%E7%8C%8E%E9%B9%B0%E7%BB%88%E7%AB%AF%E5%AE%89%E5%85%A8%E7%AE%A1%E7%90%86EDR/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -617,7 +701,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/%E5%AE%89%E5%85%A8%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/%E5%A4%A9%E6%B4%A5%E5%88%9D%E7%BA%A7%E5%B8%82%E8%B5%9B%E8%A7%A3%E9%A2%98%E9%83%A8%E5%88%86/" class="md-nav__link">
+      <a href="../../%E5%AE%89%E5%85%A8%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/%E5%A4%A9%E6%B4%A5%E5%88%9D%E7%BA%A7%E5%B8%82%E8%B5%9B%E8%A7%A3%E9%A2%98%E9%83%A8%E5%88%86/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -638,7 +722,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/%E5%AE%89%E5%85%A8%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/%E5%B8%B8%E8%A7%81%E7%9A%84webshell%E5%B7%A5%E5%85%B7%E6%B5%81%E9%87%8F%E7%89%B9%E5%BE%81%E5%88%86%E6%9E%90/" class="md-nav__link">
+      <a href="../../%E5%AE%89%E5%85%A8%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/%E5%B8%B8%E8%A7%81%E7%9A%84webshell%E5%B7%A5%E5%85%B7%E6%B5%81%E9%87%8F%E7%89%B9%E5%BE%81%E5%88%86%E6%9E%90/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -659,7 +743,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/%E5%AE%89%E5%85%A8%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%9C%AF%E8%AF%AD/" class="md-nav__link">
+      <a href="../../%E5%AE%89%E5%85%A8%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%9C%AF%E8%AF%AD/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -680,7 +764,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/%E5%AE%89%E5%85%A8%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/%E8%AF%AD%E9%9B%80%E5%9B%BE%E5%BA%8A%E8%BF%81%E7%A7%BB%E9%97%AE%E9%A2%98/" class="md-nav__link">
+      <a href="../../%E5%AE%89%E5%85%A8%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/%E8%AF%AD%E9%9B%80%E5%9B%BE%E5%BA%8A%E8%BF%81%E7%A7%BB%E9%97%AE%E9%A2%98/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -701,7 +785,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/%E5%AE%89%E5%85%A8%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/%E9%95%BF%E4%BA%AD%E9%9B%B7%E6%B1%A0%E7%A4%BE%E5%8C%BA%E7%89%88%E6%9C%AC%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/" class="md-nav__link">
+      <a href="../../%E5%AE%89%E5%85%A8%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/%E9%95%BF%E4%BA%AD%E9%9B%B7%E6%B1%A0%E7%A4%BE%E5%8C%BA%E7%89%88%E6%9C%AC%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -722,7 +806,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/%E5%AE%89%E5%85%A8%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/%E9%BB%91%E5%AE%A2%E4%B8%8E%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF%E6%8C%87%E5%8D%97/" class="md-nav__link">
+      <a href="../../%E5%AE%89%E5%85%A8%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/%E9%BB%91%E5%AE%A2%E4%B8%8E%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF%E6%8C%87%E5%8D%97/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -785,7 +869,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/Windows%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87%E2%80%94MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8F%90%E6%9D%83/" class="md-nav__link">
+      <a href="../../%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/Windows%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87%E2%80%94MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8F%90%E6%9D%83/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -806,7 +890,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/windows%20%E6%8F%90%E6%9D%83%E2%80%94%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8F%90%E6%9D%83/" class="md-nav__link">
+      <a href="../../%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/windows%20%E6%8F%90%E6%9D%83%E2%80%94%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8F%90%E6%9D%83/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -827,7 +911,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/" class="md-nav__link">
+      <a href="../../%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -890,7 +974,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/HIKVISION%20%E7%BB%BC%E5%90%88%E5%AE%89%E9%98%B2%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" class="md-nav__link">
+      <a href="../../%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/HIKVISION%20%E7%BB%BC%E5%90%88%E5%AE%89%E9%98%B2%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -911,7 +995,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/Redis%20%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E6%B8%97%E9%80%8F%E4%B9%8B%E6%97%85/" class="md-nav__link">
+      <a href="../../%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/Redis%20%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E6%B8%97%E9%80%8F%E4%B9%8B%E6%97%85/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -932,7 +1016,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/Win10%E6%B0%B8%E6%81%92%E4%B9%8B%E9%BB%91CVE-2020-0796%E5%A4%8D%E7%8E%B0shell/" class="md-nav__link">
+      <a href="../../%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/Win10%E6%B0%B8%E6%81%92%E4%B9%8B%E9%BB%91CVE-2020-0796%E5%A4%8D%E7%8E%B0shell/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -953,7 +1037,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/WinRAR%200day%E6%BC%8F%E6%B4%9ECVE-2023-38831%E5%A4%8D%E7%8E%B0%E6%9C%80%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+      <a href="../../%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/WinRAR%200day%E6%BC%8F%E6%B4%9ECVE-2023-38831%E5%A4%8D%E7%8E%B0%E6%9C%80%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -974,7 +1058,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/log4j2%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90%E5%8F%8A%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B01/" class="md-nav__link">
+      <a href="../../%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/log4j2%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90%E5%8F%8A%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B01/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -995,7 +1079,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/log4j2%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B02/" class="md-nav__link">
+      <a href="../../%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/log4j2%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B02/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1016,7 +1100,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/shiro%20%E5%8E%86%E5%8F%B2%E7%89%88%E6%9C%AC%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" class="md-nav__link">
+      <a href="../../%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/shiro%20%E5%8E%86%E5%8F%B2%E7%89%88%E6%9C%AC%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1037,7 +1121,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/%E6%8C%96%E7%9F%BFXMR%E5%B8%81%20%E7%A8%8B%E5%BA%8F%EF%BC%88%E7%97%85%E6%AF%92%EF%BC%89%E5%8F%91%E7%8E%B0%E4%B8%8E%E6%B8%85%E9%99%A4/" class="md-nav__link">
+      <a href="../../%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/%E6%8C%96%E7%9F%BFXMR%E5%B8%81%20%E7%A8%8B%E5%BA%8F%EF%BC%88%E7%97%85%E6%AF%92%EF%BC%89%E5%8F%91%E7%8E%B0%E4%B8%8E%E6%B8%85%E9%99%A4/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1058,7 +1142,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D/" class="md-nav__link">
+      <a href="../../%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1079,7 +1163,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/%E6%B5%B7%E5%BA%B7%E5%A8%81%E8%A7%86isecure%20center%20%E7%BB%BC%E5%90%88%E5%AE%89%E9%98%B2%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0%E5%AD%98%E5%9C%A8%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" class="md-nav__link">
+      <a href="../../%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/%E6%B5%B7%E5%BA%B7%E5%A8%81%E8%A7%86isecure%20center%20%E7%BB%BC%E5%90%88%E5%AE%89%E9%98%B2%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0%E5%AD%98%E5%9C%A8%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1100,7 +1184,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/%E7%94%A8%E5%8F%8B-NC-Cloud%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/" class="md-nav__link">
+      <a href="../../%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/%E7%94%A8%E5%8F%8B-NC-Cloud%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1121,7 +1205,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/%E7%BD%91%E7%A5%9ESecGate3600%20%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" class="md-nav__link">
+      <a href="../../%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/%E7%BD%91%E7%A5%9ESecGate3600%20%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1184,7 +1268,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90/HTTPS%20%20TLSv1.3/" class="md-nav__link">
+      <a href="../../%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90/HTTPS%20%20TLSv1.3/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1222,6 +1306,49 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      会话劫持
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="会话劫持">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      实验操作
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      总结
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -1233,8 +1360,87 @@
             <div class="md-content" data-md-component="content">
               <article class="md-content__inner md-typeset">
                 
-  <h1>404 - Not found</h1>
+                  
 
+
+<h1 id="kalicookie">kali实现Cookie会话劫持<a class="headerlink" href="#kalicookie" title="Permanent link">&para;</a></h1>
+<h2 id="_1">会话劫持<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>Session side jacking是会话劫持（session hijacking）的一种。
+渗透测试人员通过嗅探客户端和服务器之间的数据，获取会话的cookie。然后利用该cookie，以该cookie的所有者身份访问服务器，以获得相应的数据。
+    Kali Linux提供对应的工具hamster-sidejack。该工具把提取cookie和利用cookie整合在一起，简化渗透测试人员的操作。渗透测试人员只需要通过中间人攻击截取流量，然后设置HTTP代理，就可以在本机浏览器中获取cookie，并直接利用。</p>
+<h3 id="_2">实验操作<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p>下载arpspoof
+<div class="highlight"><pre><span></span><code><span class="w"> </span><span class="nx">apt</span><span class="w"> </span><span class="nx">install</span><span class="w"> </span><span class="nx">arpspoof</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>安装攻击工具ferret-sidejack与hamster-sidejack。
+<div class="highlight"><pre><span></span><code><span class="nx">dpkg</span><span class="w"> </span><span class="o">--</span><span class="nx">add</span><span class="o">-</span><span class="nx">architecture</span><span class="w"> </span><span class="nx">i386</span><span class="w"> </span>
+<span class="nx">apt</span><span class="o">-</span><span class="nx">get</span><span class="w"> </span><span class="nx">update</span>
+
+<span class="nx">apt</span><span class="o">-</span><span class="nx">get</span><span class="w"> </span><span class="nx">install</span><span class="w"> </span><span class="nx">ferret</span><span class="o">-</span><span class="nx">sidejack</span><span class="o">:</span><span class="nx">i386</span>
+<span class="nx">apt</span><span class="o">-</span><span class="nx">get</span><span class="w"> </span><span class="nx">install</span><span class="w">  </span><span class="nx">hamster</span><span class="o">-</span><span class="nx">sidejack</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>劫持用户的登录信息cookies工具 hamster-sidejack。
+<div class="highlight"><pre><span></span><code><span class="nx">开启kali路由转发功能</span>
+<span class="nx">echo</span><span class="w"> </span><span class="mf">1</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="sr">/proc/sys</span><span class="o">/</span><span class="nx">net</span><span class="o">/</span><span class="nx">ipv4</span><span class="o">/</span><span class="nx">ip_forward</span><span class="w"> </span>
+<span class="nx">双向ARP</span><span class="w"> </span><span class="nx">进行中间人攻击</span>
+<span class="nx">arpspoof</span><span class="w"> </span><span class="o">-</span><span class="nx">i</span><span class="w"> </span><span class="nx">eth0</span><span class="w"> </span><span class="o">-</span><span class="nx">t</span><span class="w"> </span><span class="mf">192.168.213.2</span><span class="w"> </span><span class="mf">192.168.213.131</span><span class="w"> </span><span class="o">-</span><span class="nx">r</span><span class="w">　</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>开启wireshark</p>
+</li>
+</ol>
+<p>在目标主机上登录相对应的网站，尽量选择安全性较低的，登录要留存过程 ，多刷新几次产生流量。
+以本人超星账号为例，因为超星学习通的网站使用的协议为HTTP 协议，</p>
+<div class="highlight"><pre><span></span><code><span class="nx">arpspoof</span><span class="w"> </span><span class="o">-</span><span class="nx">i</span><span class="w"> </span><span class="nx">eth0</span><span class="w">  </span><span class="o">-</span><span class="nx">t</span><span class="w"> </span><span class="mf">192.168.213.131</span><span class="w"> </span><span class="mf">192.168.213.2</span><span class="w"> </span><span class="o">-</span><span class="nx">r</span>
+<span class="w">            </span><span class="nx">网卡</span><span class="w">         </span><span class="nx">目标主机</span><span class="w">        </span><span class="nx">内网网关</span>
+</code></pre></div>
+<p><img alt="image.png" src="https://s2.loli.net/2023/07/28/2NOVDzGAnrRtQ4C.png" /></p>
+<ol>
+<li>ferret-sidejack分析WireShark抓取到的含有HTTP数据包,分析出明文传输的Cookie值，获取到制定网站的Cookie值后，并生成hamster.txt</li>
+</ol>
+<p><img alt="image.png" src="https://s2.loli.net/2023/07/28/XyKvx8WdB7pnfAL.png" /><img alt="image.png" src="https://s2.loli.net/2023/07/28/1MepmRY4avcyus9.png" /></p>
+<ol>
+<li>使用Hamster-sidejack在hamster.txt同一目录下运行，hamster-sidejack 启动代理端口。<img alt="image.png" src="https://s2.loli.net/2023/07/28/NlYmW64fxibFuLs.png" /></li>
+<li>配置浏览器代理为127.0.0.1:1234。（不上图了）</li>
+<li>使用kali自带浏览器登录hamster生成的代理网址，示例使用的是127.0.0.1:1234。</li>
+</ol>
+<p><img alt="image.png" src="https://s2.loli.net/2023/07/28/W4L5r3z9KMonHhJ.png" /></p>
+<ol>
+<li>登录网址成功后，会显示拦截的目标主机，点击进去会有拦截到的HTTP网址列表，里面都是网址对应的cookie值。</li>
+</ol>
+<p><img alt="image.png" src="https://s2.loli.net/2023/07/28/9Fa6oyngpBfuPiL.png" /></p>
+<ol>
+<li>直接点击网址即可登录。</li>
+</ol>
+<p><img alt="image.png" src="https://s2.loli.net/2023/07/28/JoMYjxmlsnkRyBe.png" /></p>
+<h3 id="_3">总结<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>HTTP的cookie使用工具可以分析得到，但是无法分析到HTTPS的cookie，
+接下来会更新HTTPS的工作原理。</p>
+<p>wireshark无法抓取手机的数据包：
+原因：</p>
+<blockquote>
+<p>Android致力于保护用户们的设备和数据安全。我们保证数据安全的方法之一是保护所有进入或离开Android设备的数据在传输中使用传输层安全性（TLS）。正如我们在Android P开发人员预览中所宣布的那样，我们通过阻止针对Android P的应用程序默认允许未加密的连接来进一步改进这些保护。这是我们多年来为更好地保护Android用户而做出的各种更改。为了防止意外的未加密连接，我们android:usesCleartextTraffic在Android Marshmallow中引入了manifest属性。在Android Nougat中，我们通过创建Network Security Config功能扩展了该属性，该功能允许应用程序指示他们不打算在没有加密的情况下发送网络流量。在Android Nougat和Oreo中，我们仍然允许明文连接。</p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
               </article>
             </div>
           
@@ -1268,10 +1474,10 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "/", "features": [], "search": "/assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
     
     
-      <script src="/assets/javascripts/bundle.8fd75fb4.min.js"></script>
+      <script src="../../assets/javascripts/bundle.8fd75fb4.min.js"></script>
       
     
   </body>

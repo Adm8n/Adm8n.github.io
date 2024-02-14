@@ -1,0 +1,2474 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../%E5%90%AF%E6%98%8E%E6%98%9F%E8%BE%B0%E6%BA%AF%E6%BA%90%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AC%AC%E4%B8%89%E7%AB%A0%2001%20Web%20%E5%AE%89%E5%85%A8%E7%9B%91%E6%B5%8B%E4%B8%8E%E5%88%86%E6%9E%90/">
+      
+      
+        <link rel="next" href="../MySQL%E5%BA%93%E8%A1%A8%E4%B8%8ESQL%E8%AF%AD%E5%8F%A5/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.9">
+    
+    
+      
+        <title>Hadoop 部署与使用 - Adm8nの知识库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.f2e4d321.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+Simplified+Chinese:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Noto Sans Simplified Chinese";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#hadoop" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="Adm8nの知识库" class="md-header__button md-logo" aria-label="Adm8nの知识库" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Adm8nの知识库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Hadoop 部署与使用
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9h-1.9M20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69m-9.15 3.96h2.3L12 9l-1.15 3.65Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Adm8nの知识库" class="md-nav__button md-logo" aria-label="Adm8nの知识库" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    Adm8nの知识库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Welcome to MkDocs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    OKR
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            OKR
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../OKR/%E7%9B%AE%E6%A0%87%E7%AE%A1%E7%90%86%E6%B3%95%20OKR/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    目标管理法 OKR
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    内网小姿势
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            内网小姿势
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%86%85%E7%BD%91%E5%B0%8F%E5%A7%BF%E5%8A%BF/Ettercap%E5%AE%9E%E7%8E%B0%E5%86%85%E7%BD%91%E5%8A%AB%E6%8C%81%E7%9B%AE%E6%A0%87%E4%B8%BB%E6%9C%BADNS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ettercap实现内网劫持目标主机DNS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%86%85%E7%BD%91%E5%B0%8F%E5%A7%BF%E5%8A%BF/Zerotier%E7%BB%84%E7%BD%91/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Zerotier组网
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%86%85%E7%BD%91%E5%B0%8F%E5%A7%BF%E5%8A%BF/kali%E5%AE%9E%E7%8E%B0Cookie%E4%BC%9A%E8%AF%9D%E5%8A%AB%E6%8C%81/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    kali实现Cookie会话劫持
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%86%85%E7%BD%91%E5%B0%8F%E5%A7%BF%E5%8A%BF/%E5%9F%9F%E6%B8%97%E9%80%8F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%BA%8C/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    域渗透基础知识二
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    启明星辰溯源工程师
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            启明星辰溯源工程师
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%90%AF%E6%98%8E%E6%98%9F%E8%BE%B0%E6%BA%AF%E6%BA%90%E5%B7%A5%E7%A8%8B%E5%B8%88/%E7%AC%AC%E4%B8%89%E7%AB%A0%2001%20Web%20%E5%AE%89%E5%85%A8%E7%9B%91%E6%B5%8B%E4%B8%8E%E5%88%86%E6%9E%90/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    第三章 01 Web 安全监测与分析
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    安全杂七杂八
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            安全杂七杂八
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Hadoop 部署与使用
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Hadoop 部署与使用
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      第一日
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      6）均关闭防火墙
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      第二日
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="第二日">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      一、安装
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      二、配置管理
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hivehdfs" class="md-nav__link">
+    <span class="md-ellipsis">
+      三、为Hive创建HDFS目录
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      四、初始化
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      五、运行
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      第三日
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MySQL%E5%BA%93%E8%A1%A8%E4%B8%8ESQL%E8%AF%AD%E5%8F%A5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MySQL库表与SQL语句
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../PHP%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%85%A5%E9%97%A8/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PHP序列化与反序列化入门
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Win%E5%9F%9F%E6%8E%A7%E4%B8%8E%E7%8C%8E%E9%B9%B0%E7%BB%88%E7%AB%AF%E5%AE%89%E5%85%A8%E7%AE%A1%E7%90%86EDR/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Win域控与猎鹰终端安全管理EDR
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%A4%A9%E6%B4%A5%E5%88%9D%E7%BA%A7%E5%B8%82%E8%B5%9B%E8%A7%A3%E9%A2%98%E9%83%A8%E5%88%86/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2023年datacon初级赛解题部分
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%B8%B8%E8%A7%81%E7%9A%84webshell%E5%B7%A5%E5%85%B7%E6%B5%81%E9%87%8F%E7%89%B9%E5%BE%81%E5%88%86%E6%9E%90/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    常见 webshell 工具流量特征分析
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%9C%AF%E8%AF%AD/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    网络安全术语
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E8%AF%AD%E9%9B%80%E5%9B%BE%E5%BA%8A%E8%BF%81%E7%A7%BB%E9%97%AE%E9%A2%98/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    正则表达式匹配语雀图片下载卡顿问题
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E9%95%BF%E4%BA%AD%E9%9B%B7%E6%B1%A0%E7%A4%BE%E5%8C%BA%E7%89%88%E6%9C%AC%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    长亭雷池社区版本安装与使用
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E9%BB%91%E5%AE%A2%E4%B8%8E%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF%E6%8C%87%E5%8D%97/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    黑客与安全技术指南(第4章 代码审计)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    权限提升
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            权限提升
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/Windows%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87%E2%80%94MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8F%90%E6%9D%83/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Windows权限提升—MySQL数据库提权
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/windows%20%E6%8F%90%E6%9D%83%E2%80%94%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8F%90%E6%9D%83/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Windows 提权——数据库提权
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    权限提升介绍
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    漏洞复现
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            漏洞复现
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/HIKVISION%20%E7%BB%BC%E5%90%88%E5%AE%89%E9%98%B2%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    HIKVISION 综合安防管理平台任意文件上传
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/Redis%20%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E6%B8%97%E9%80%8F%E4%B9%8B%E6%97%85/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Redis 未授权访问渗透之旅
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/Win10%E6%B0%B8%E6%81%92%E4%B9%8B%E9%BB%91CVE-2020-0796%E5%A4%8D%E7%8E%B0shell/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Win10永恒之黑CVE-2020-0796复现shell
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/WinRAR%200day%E6%BC%8F%E6%B4%9ECVE-2023-38831%E5%A4%8D%E7%8E%B0%E6%9C%80%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    WinRAR 0day漏洞CVE-2023-38831复现最详解
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/log4j2%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90%E5%8F%8A%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B01/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Log4j2原理分析及漏洞复现1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/log4j2%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B02/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    log4j2漏洞复现2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/shiro%20%E5%8E%86%E5%8F%B2%E7%89%88%E6%9C%AC%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Shiro 历史版本漏洞复现
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/%E6%8C%96%E7%9F%BFXMR%E5%B8%81%20%E7%A8%8B%E5%BA%8F%EF%BC%88%E7%97%85%E6%AF%92%EF%BC%89%E5%8F%91%E7%8E%B0%E4%B8%8E%E6%B8%85%E9%99%A4/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    挖矿XMR币程序（病毒）发现与清除
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    永恒之蓝(ms_017)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/%E6%B5%B7%E5%BA%B7%E5%A8%81%E8%A7%86isecure%20center%20%E7%BB%BC%E5%90%88%E5%AE%89%E9%98%B2%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0%E5%AD%98%E5%9C%A8%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    海康威视isecure center综合安防管理平台存在任意文件上传漏洞
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/%E7%94%A8%E5%8F%8B-NC-Cloud%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    用友-NC-Cloud远程代码执行
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/%E7%BD%91%E7%A5%9ESecGate3600%20%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    网神SecGate3600 文件上传
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    网络协议分析
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            网络协议分析
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90/HTTPS%20%20TLSv1.3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    HTTPS && HTTPS 协议分析
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      第一日
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      6）均关闭防火墙
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      第二日
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="第二日">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      一、安装
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      二、配置管理
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hivehdfs" class="md-nav__link">
+    <span class="md-ellipsis">
+      三、为Hive创建HDFS目录
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      四、初始化
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      五、运行
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      第三日
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="hadoop">Hadoop 部署与使用<a class="headerlink" href="#hadoop" title="Permanent link">&para;</a></h1>
+<h2 id="_1">第一日<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>安装Hadoop:
+1、将hadoop-3.2.2.tar.gz，拷贝到CentOS中的~/software目录下</p>
+<p>2、将Hadoop压缩包，解压缩到用户主目录的bigdata目录下；
+    $ cd ~
+    $ mkdir bigdata 
+    $ cd bigdata
+    $ tar -zxvf ~/software/hadoop-3.2.2.tar.gz</p>
+<p>3、打开"/etc/profile"配置文件，配置hadoop环境变量:</p>
+<div class="highlight"><pre><span></span><code>    export HADOOP_HOME=/home/hduser/dt/hadoop-3.2.2
+    export PATH=$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$PATH 
+    export HADOOP_MAPRED_HOME=${HADOOP_HOME}
+    export HADOOP_COMMON_HOME=${HADOOP_HOME}
+    export HADOOP_HDFS_HOME=${HADOOP_HOME}
+    export YARN_HOME=${HADOOP_HOME}
+    export HADOOP_OPTS=&quot;-Djava.library.path=$HADOOP_HOME/lib:$HADOOP_HOME/lib/native&quot;
+    # export CLASSPATH=$($HADOOP_HOME/bin/hadoop classpath):$CLASSPATH   # 造成包冲突，影响zeppelin启动
+</code></pre></div>
+<p>4、保存。然后执行/etc/profile文件(让配置生效)：
+    $ source /etc/profile</p>
+<p>5、测试环境变量是否配置正确：</p>
+<div class="codehilite"><pre><span></span><code>   $ hadoop version
+</code></pre></div>
+
+<hr />
+<p>配置Hadoop:
+1、配置$HADOOP_HOME/etc/hadoop/目录中如下的配置文件：</p>
+<ol>
+<li>
+<p>hadoop-env.sh：</p>
+<p>修改JAVA_HOME属性的值：export JAVA_HOME=/usr/local/jdk1.8.0_251  </p>
+</li>
+</ol>
+<p>2) core-site.xml</p>
+<div class="highlight"><pre><span></span><code>&lt;configuration&gt;
+       &lt;property&gt;
+        &lt;name&gt;fs.defaultFS&lt;/name&gt;
+        &lt;value&gt;hdfs://cda:8020/&lt;/value&gt;
+       &lt;/property&gt;
+       &lt;property&gt;
+        &lt;name&gt;hadoop.tmp.dir&lt;/name&gt;
+        &lt;value&gt;file:///home/hduser/bigdata/hadoop-3.2.2/dfs/tmp&lt;/value&gt;
+       &lt;/property&gt;
+&lt;/configuration&gt;
+</code></pre></div>
+<p>3) hdfs-site.xml</p>
+<div class="highlight"><pre><span></span><code>&lt;configuration&gt;
+    &lt;property&gt;
+        &lt;name&gt;dfs.namenode.name.dir&lt;/name&gt;
+        &lt;value&gt;file:///home/hduser/bigdata/hadoop-3.2.2/dfs/name&lt;/value&gt;
+    &lt;/property&gt;
+    &lt;property&gt;
+        &lt;name&gt;dfs.datanode.data.dir&lt;/name&gt;
+        &lt;value&gt;file:///home/hduser/bigdata/hadoop-3.2.2/dfs/data&lt;/value&gt;
+    &lt;/property&gt;
+    &lt;property&gt;
+        &lt;name&gt;dfs.replication&lt;/name&gt;
+        &lt;value&gt;1&lt;/value&gt;
+    &lt;/property&gt;
+&lt;/configuration&gt;
+</code></pre></div>
+<p>4) mapred-site.xml</p>
+<p>​       配置内容如下：</p>
+<div class="highlight"><pre><span></span><code>&lt;configuration&gt;
+      &lt;property&gt;
+            &lt;name&gt;mapreduce.framework.name&lt;/name&gt;
+            &lt;value&gt;yarn&lt;/value&gt;
+      &lt;/property&gt;
+      &lt;property&gt;
+            &lt;name&gt;mapreduce.application.classpath&lt;/name&gt;
+            &lt;value&gt;
+         $HADOOP_HOME/share/hadoop/hdfs/*,
+         $HADOOP_HOME/share/hadoop/hdfs/lib/*,
+         $HADOOP_HOME/share/hadoop/yarn/*,
+         $HADOOP_HOME/share/hadoop/yarn/lib/*,
+         $HADOOP_HOME/share/hadoop/mapreduce/*,
+         $HADOOP_HOME/share/hadoop/mapreduce/lib/*
+            &lt;/value&gt;
+      &lt;/property&gt;
+&lt;/configuration&gt;
+</code></pre></div>
+<p>5) yarn-site.xml</p>
+<div class="highlight"><pre><span></span><code>&lt;configuration&gt;
+    &lt;property&gt;
+        &lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt;
+        &lt;value&gt;mapreduce_shuffle&lt;/value&gt;
+    &lt;/property&gt;
+    &lt;property&gt;
+        &lt;name&gt;yarn.nodemanager.aux-services.mapreduce_shuffle.class&lt;/name&gt;
+        &lt;value&gt;org.apache.hadoop.mapred.ShuffleHandler&lt;/value&gt;
+    &lt;/property&gt;
+    &lt;property&gt;
+        &lt;name&gt;yarn.resourcemanager.hostname&lt;/name&gt;
+        &lt;value&gt;localhost&lt;/value&gt;
+    &lt;/property&gt;
+&lt;/configuration&gt;
+</code></pre></div>
+<p>4、格式化hdfs(仅需执行格式化一次)。在终端窗口，执行命令:
+    $ hdfs namenode -format</p>
+<hr />
+<p>设置主机名hostname：</p>
+<ul>
+<li>
+<p>要求有root权限</p>
+</li>
+<li>
+<p>查看当前hostname: 
+    hostnamectl status</p>
+</li>
+<li>
+<p>修改hostname：(注：大小写敏感;总长度不超过63个字符,越短越好)
+    sudo hostnamectl set-hostname master</p>
+</li>
+<li>
+<p>查看当前IP地址：
+    ip addr list</p>
+</li>
+<li>
+<p>然后，打开hosts文件，编辑设置全限定域名(FQDN)
+    vi /etc/hosts</p>
+</li>
+<li>
+<p>增加一行新的内容(映射hostname到IP地址)：
+    192.168.190.145 master1</p>
+</li>
+<li>
+<p>重启
+    sudo reboot -f</p>
+</li>
+</ul>
+<p>在Hadoop上执行MR程序(伪分布模式)：
+1、启动HDFS集群:
+   $ start-dfs.sh</p>
+<p>2、使用jps命令查看当前节点上运行的服务：
+   $ jps </p>
+<p>3、查看块状态报告：
+   $ hdfs dfsadmin -report</p>
+<p>4、查看HDFS文件目录:
+   $ hdfs dfs -ls /</p>
+<p>5、成功启动后，可以通过Web界面查看NameNode 和 Datanode 信息和HDFS文件系统。
+   NameNode Web接口：<a href="http://xueai8:9870/">http://xueai8:9870/</a></p>
+<p>6、启动yarn:
+   $ start-yarn.sh
+   $ jps</p>
+<div class="codehilite"><pre><span></span><code>成功启动后，可以通过Web界面查看ResourceManager集群信息： [http://xueai8:8088](http://xueai8:8088)。
+成功启动后，可以通过Web界面查看NodeManager节点信息： [http://xueai8:8042](http://xueai8:8042)。
+</code></pre></div>
+
+<p>7、启动historyserver和timelineserver
+   $ mapred -daemon start historyserver
+   $ yarn -daemon start timelineserver</p>
+<p>8、运行pi程序：
+   $ cd bigdata/hadoop-3.2.1/share/hadoop/mapreduce
+   $ hadoop jar hadoop-mapreduce-examples-3.2.1.jar pi 10 20</p>
+<p>9、可以通过 Web 界面查看：
+   打开浏览器，在地址栏输入：<a href="http://xueai8:8088">http://xueai8:8088</a>
+   查看任务进度：<a href="http://xueai8:8088/cluster">http://xueai8:8088/cluster</a> ，在 Web 界面点击 “Tracking UI” 这一列的 History 连接，可以看到任务的运行信息</p>
+<p>10、关闭集群：
+   $ stop-yarn.sh
+   $ stop-dfs.sh
+   $ mapred -daemon stop historyserver
+   $ yarn -daemon stop timelineserver</p>
+<hr />
+<p>一、前期准备：
+1） 至少有三台机器组成一个集群；</p>
+<p>2） 集群中的三台机器，都要有的配置：
+   2.1 安装jdk 8+，并配置好环境变量</p>
+<p>2.2 都要安装SSH服务: (CentOS忽略此步，已经自带有SSH服务)
+       在每台机器上执行：sudo yum install ssh   </p>
+<p>3）每台机器的IP修改为唯一，分别为：
+    192.168.190.162
+    192.168.190.163
+    192.168.190.164</p>
+<p>4）每台机器的主机名(hostname)改为唯一，分别为: 
+    master<br />
+    worker01<br />
+    worker02</p>
+<div class="codehilite"><pre><span></span><code>   在master机器的终端窗口中，执行以下命令修改机器名为master：
+$ sudo hostnamectl set-hostname master1
+
+   在worker01机器的终端窗口中，执行以下命令修改机器名为worker01：
+$ sudo hostnamectl set-hostname worker01
+
+   在worker02机器的终端窗口中，执行以下命令修改机器名为worker02：
+$ sudo hostnamectl set-hostname worker02
+</code></pre></div>
+
+<p>5）设置每台机器的ip与主机名的对应关系：     <br />
+   注：请将原文件最上面的第二行127.0.1.1 删除掉,每台机器都要做
+    $ sudo nano /etc/hosts</p>
+<div class="codehilite"><pre><span></span><code>192.168.136.162 master1
+192.168.136.163 worker01
+192.168.136.164 worker02
+</code></pre></div>
+
+<h2 id="6">6）均关闭防火墙<a class="headerlink" href="#6" title="Permanent link">&para;</a></h2>
+<p>Snail
+1、在每台机器上，执行如下命令：
+       $ ssh localhost
+       $ ssh exit   # 记得最后通过这个命令退出ssh连接</p>
+<p>2、在namenode(master主机)上，使用如下命令生成公私钥：
+       $ cd .ssh
+       $ ssh-keygen -t rsa
+       然后一路回车，在.ssh下生成公私钥。</p>
+<p>3、将namenode(master主机)上的公钥分别加入master、worker01和worker02机器的授权文件中。
+       执行如下命令：
+       $ ssh-copy-id hduser@master1
+       $ ssh-copy-id hduser@worker01
+       $ ssh-copy-id hduser@worker02</p>
+<p>4、测试。在master节点机器上，使用ssh分别连接master、worker01和worker02:
+       $ ssh master1
+       $ exit</p>
+<div class="codehilite"><pre><span></span><code>   $ ssh worker01
+   $ exit
+
+   $ ssh worker02
+   $ exit
+
+   这时会发现不需要输入密码，直接就ssh连接上了这两台机器。
+</code></pre></div>
+
+<p>三台设备 </p>
+<ol>
+<li>修改 vim ./hdfs-site.xml 中的value为3 </li>
+<li>添加一个workers文件 写入三台设备的主机名。</li>
+<li>修改</li>
+</ol>
+<h2 id="_2">第二日<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>前提：
+    在安装Hive之前，要求先：
+    - 安装JDK 8+
+    - 安装Hadoop-3.1.x
+    - 安装MySQL数据库（CentOS安装Maridb数据库）</p>
+<h4 id="_3">一、安装<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code>1. 下载hive最新的稳定版本的包到~/software/目录下，然后解压缩到~/bigdata/下：
+    $ cd ~/bigdata
+    $ tar -xzvf ~/software/apache-hive-3.1.2-bin.tar.gz
+
+    把文件夹的名字改短些：
+    $ mv apache-hive-3.1.2-bin hive-3.1.2
+
+2. 设置环境变量：
+    $ sudo nano /etc/profile
+
+   在文件的最后，添加如下两句：
+    export  HIVE_HOME=/home/hduser/bigdata/hive-3.1.2
+    export  PATH=$HIVE_HOME/bin:$PATH
+
+   然后执行：
+    $ source /etc/profile
+</code></pre></div>
+
+<h4 id="_4">二、配置管理<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code>配置3个文件：
+hive-env.sh 
+hive-log4j2.properties
+hive-site.xml
+
+1. 修改hive-env.sh。默认没有这个文件，从模板文件复制一个过来：
+         $ cp hive-env.sh.template hive-env.sh
+
+   打开它：
+     $ nano hive-env.sh
+
+   在打开的配置文件最后，添加如下几行：
+     export JAVA_HOME=/usr/local/jdk1.8.0_181
+     export HADOOP_HOME=/home/hduser/bigdata/hadoop-3.2.1
+     export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
+
+     export HIVE_HOME=/home/hduser/bigdata/hive-3.1.2
+     export HIVE_CONF_DIR=$HIVE_HOME/conf
+     export HIVE_AUX_JARS_PATH=$HIVE_HOME/lib
+
+2. 修改hive-log4j2.properties，配置hive的日志目录。
+   默认没有这个文件，从模板文件复制一个过来：
+         $ cp hive-log4j2.properties.template hive-log4j2.properties
+     $ nano hive-log4j2.properties
+
+   修改下面的参数（等号右侧的值）：
+     property.hive.log.dir=/home/hduser/bigdata/hive-3.1.2/logs
+</code></pre></div>
+
+<hr />
+<ol>
+<li>
+<p>创建 配置hive-site.xml。默认没有这个文件，所以先把它创建出来：
+             $ nano hive-site.xml</p>
+<p>在打开的hive-site.xml中，把以下内容拷贝进行，然后保存退出：</p>
+</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="w"> </span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;</span>
+<span class="w"> </span><span class="cp">&lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;configuration.xsl&quot;?&gt;</span>
+<span class="w"> </span><span class="nt">&lt;configuration&gt;</span>
+<span class="w">       </span><span class="cp">&lt;!- 设置下面这些属性 -&gt;</span>
+<span class="w">       </span><span class="nt">&lt;property&gt;</span>
+<span class="w">        </span><span class="nt">&lt;name&gt;</span>hive.exec.scratchdir<span class="nt">&lt;/name&gt;</span>
+<span class="w">        </span><span class="nt">&lt;value&gt;</span>/tmp/hive<span class="nt">&lt;/value&gt;</span>
+<span class="w">       </span><span class="nt">&lt;/property&gt;</span><span class="w">      </span>
+<span class="w">       </span><span class="nt">&lt;property&gt;</span>
+<span class="w">        </span><span class="nt">&lt;name&gt;</span>hive.querylog.location<span class="nt">&lt;/name&gt;</span>
+<span class="w">        </span><span class="nt">&lt;value&gt;</span>/home/hduser/bigdata/hive-2.3.4/tmp/hduser<span class="nt">&lt;/value&gt;</span>
+<span class="w">       </span><span class="nt">&lt;/property&gt;</span><span class="w">  </span>
+
+<span class="w">       </span><span class="nt">&lt;property&gt;</span>
+<span class="w">        </span><span class="nt">&lt;name&gt;</span>hive.aux.jars.path<span class="nt">&lt;/name&gt;</span>
+<span class="w">        </span><span class="nt">&lt;value&gt;</span>/home/hduser/bigdata/hive-2.3.4/lib,/home/hduser/bigdata/hive-2.3.4/jdbc<span class="nt">&lt;/value&gt;</span>
+<span class="w">       </span><span class="nt">&lt;/property&gt;</span>
+<span class="w">       </span><span class="nt">&lt;property&gt;</span>
+<span class="w">        </span><span class="nt">&lt;name&gt;</span>hive.metastore.warehouse.dir<span class="nt">&lt;/name&gt;</span>
+<span class="w">        </span><span class="nt">&lt;value&gt;</span>/user/hive/warehouse<span class="nt">&lt;/value&gt;</span>
+<span class="w">       </span><span class="nt">&lt;/property&gt;</span>
+<span class="w">       </span><span class="nt">&lt;property&gt;</span>
+<span class="w">        </span><span class="nt">&lt;name&gt;</span>hive.metastore.uris<span class="nt">&lt;/name&gt;</span>
+<span class="w">        </span><span class="nt">&lt;value&gt;</span>thrift://master:9083<span class="nt">&lt;/value&gt;</span>
+<span class="w">       </span><span class="nt">&lt;/property&gt;</span>
+
+<span class="w">       </span><span class="cp">&lt;!-配置Hive Metastore:MySQL连接信息 -&gt;</span>
+<span class="w">       </span><span class="nt">&lt;property&gt;</span>
+<span class="w">        </span><span class="nt">&lt;name&gt;</span>javax.jdo.option.ConnectionURL<span class="nt">&lt;/name&gt;</span>
+<span class="w">        </span><span class="nt">&lt;value&gt;</span>jdbc:mysql://cda:3306/hive?createDatabaseIfNotExist=true<span class="ni">&amp;amp;</span>characterEncoding=UTF-8<span class="nt">&lt;/value&gt;</span>
+<span class="w">        </span><span class="nt">&lt;description&gt;</span>如果是mariadb：jdbc:mariadb://cda:3306/hive<span class="nt">&lt;/description&gt;</span>
+<span class="w">       </span><span class="nt">&lt;/property&gt;</span>
+<span class="w">       </span><span class="nt">&lt;property&gt;</span>
+<span class="w">        </span><span class="nt">&lt;name&gt;</span>javax.jdo.option.ConnectionDriverName<span class="nt">&lt;/name&gt;</span>
+<span class="w">        </span><span class="nt">&lt;value&gt;</span>com.mysql.jdbc.Driver<span class="nt">&lt;/value&gt;</span>
+<span class="w">        </span><span class="nt">&lt;description&gt;</span>如果是mariadb：org.mariadb.jdbc.Driver<span class="nt">&lt;/description&gt;</span>
+<span class="w">       </span><span class="nt">&lt;/property&gt;</span>
+<span class="w">       </span><span class="nt">&lt;property&gt;</span>
+<span class="w">        </span><span class="nt">&lt;name&gt;</span>javax.jdo.option.ConnectionUserName<span class="nt">&lt;/name&gt;</span>
+<span class="w">        </span><span class="nt">&lt;value&gt;</span>root<span class="nt">&lt;/value&gt;</span>
+<span class="w">       </span><span class="nt">&lt;/property&gt;</span>
+<span class="w">       </span><span class="nt">&lt;property&gt;</span>
+<span class="w">        </span><span class="nt">&lt;name&gt;</span>javax.jdo.option.ConnectionPassword<span class="nt">&lt;/name&gt;</span>
+<span class="w">        </span><span class="nt">&lt;value&gt;</span>admin<span class="nt">&lt;/value&gt;</span>
+<span class="w">       </span><span class="nt">&lt;/property&gt;</span>
+
+<span class="w">       </span><span class="cp">&lt;!-配置hiveserver2主机(这里最好是配置ip地址，以便于从Windows连接)-&gt;</span>
+<span class="w">       </span><span class="nt">&lt;property&gt;</span>
+<span class="w">             </span><span class="nt">&lt;name&gt;</span>hive.server2.thrift.bind.host<span class="nt">&lt;/name&gt;</span>
+<span class="w">             </span><span class="nt">&lt;value&gt;</span>master<span class="nt">&lt;/value&gt;</span>
+<span class="w">             </span><span class="nt">&lt;description&gt;</span>Bind<span class="w"> </span>host<span class="w"> </span>on<span class="w"> </span>which<span class="w"> </span>to<span class="w"> </span>run<span class="w"> </span>the<span class="w"> </span>HiveServer2<span class="w"> </span>Thrift<span class="w"> </span>service.<span class="nt">&lt;/description&gt;</span>
+<span class="w">       </span><span class="nt">&lt;/property&gt;</span>
+<span class="w">      </span><span class="nt">&lt;property&gt;</span>
+<span class="w">             </span><span class="nt">&lt;name&gt;</span>hive.server2.thrift.port<span class="nt">&lt;/name&gt;</span>
+<span class="w">             </span><span class="nt">&lt;value&gt;</span>10000<span class="nt">&lt;/value&gt;</span>
+<span class="w">             </span><span class="nt">&lt;description&gt;</span>监听的TCP端口号，默认是10000<span class="nt">&lt;/description&gt;</span>
+<span class="w">       </span><span class="nt">&lt;/property&gt;</span>
+<span class="w">       </span><span class="cp">&lt;!-配置beeline远程客户端连接时的用户名和密码。这个用户名要在对应的hadoop的配置文件core-site.xml中也配置-&gt;</span><span class="w">  </span>
+<span class="w">       </span><span class="nt">&lt;property&gt;</span>
+<span class="w">             </span><span class="nt">&lt;name&gt;</span>hive.server2.thrift.client.user<span class="nt">&lt;/name&gt;</span>
+<span class="w">             </span><span class="nt">&lt;value&gt;</span>hduser<span class="nt">&lt;/value&gt;</span>
+<span class="w">       </span><span class="nt">&lt;/property&gt;</span>
+<span class="w">       </span><span class="nt">&lt;property&gt;</span>
+<span class="w">             </span><span class="nt">&lt;name&gt;</span>hive.server2.thrift.client.password<span class="nt">&lt;/name&gt;</span>
+<span class="w">             </span><span class="nt">&lt;value&gt;</span>hduser<span class="nt">&lt;/value&gt;</span>
+<span class="w">       </span><span class="nt">&lt;/property&gt;</span><span class="w"> </span>
+
+<span class="w">       </span>#<span class="w"> </span>关闭元数据验证
+<span class="w">    </span><span class="nt">&lt;property&gt;</span><span class="w">     </span>
+<span class="w">        </span><span class="nt">&lt;name&gt;</span>datanucleus.metadata.validate<span class="nt">&lt;/name&gt;</span><span class="w">    </span>
+<span class="w">        </span><span class="nt">&lt;value&gt;</span>false<span class="nt">&lt;/value&gt;</span><span class="w">    </span>
+<span class="w">    </span><span class="nt">&lt;/property&gt;</span><span class="w"> </span>
+<span class="w">    </span>#<span class="w"> </span>关闭元数据存储模式验证
+<span class="w">    </span><span class="nt">&lt;property&gt;</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&lt;name&gt;</span>hive.metastore.schema.verification<span class="nt">&lt;/name&gt;</span><span class="w"> </span>
+<span class="w">        </span><span class="nt">&lt;value&gt;</span>false<span class="nt">&lt;/value&gt;</span><span class="w"> </span>
+<span class="w">    </span><span class="nt">&lt;/property&gt;</span>
+<span class="w">    </span><span class="nt">&lt;property&gt;</span>
+<span class="w">        </span><span class="nt">&lt;name&gt;</span>datanucleus.schema.autoCreateAll<span class="nt">&lt;/name&gt;</span>
+<span class="w">        </span><span class="nt">&lt;value&gt;</span>ture<span class="nt">&lt;/value&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/property&gt;</span>
+
+<span class="w"> </span><span class="nt">&lt;/configuration&gt;</span>
+</code></pre></div>
+<p>按需修改当前变量 自行配置：
+<div class="highlight"><pre><span></span><code>:::warning
+&lt;configuration&gt;
+
+      &lt;!- 设置下面这些属性 -&gt;
+      &lt;property&gt;
+                &lt;name&gt;hive.exec.scratchdir&lt;/name&gt;
+                &lt;value&gt;/tmp/hive&lt;/value&gt;
+      &lt;/property&gt;
+      &lt;property&gt;
+                &lt;name&gt;hive.querylog.location&lt;/name&gt;
+                &lt;value&gt;/home/hadoopuser/bigdata/hive-3.1.3/tmp/hadoopuser&lt;/value&gt;
+      &lt;/property&gt;
+
+      &lt;property&gt;
+                &lt;name&gt;hive.aux.jars.path&lt;/name&gt;
+                &lt;value&gt;/home/hadoopuser/bigdata/hive-3.1.3/lib,/home/hadoopuser/bigdata/hive-3.1.3/jdbc&lt;/value&gt;
+      &lt;/property&gt;
+      &lt;property&gt;
+                &lt;name&gt;hive.metastore.warehouse.dir&lt;/name&gt;
+                &lt;value&gt;/user/hive/warehouse&lt;/value&gt;
+      &lt;/property&gt;
+      &lt;property&gt;
+                &lt;name&gt;hive.metastore.uris&lt;/name&gt;
+                &lt;value&gt;thrift://master1:9083&lt;/value&gt;
+      &lt;/property&gt;
+
+      &lt;!-配置Hive Metastore:MySQL连接信息 -&gt;
+      &lt;property&gt;
+                &lt;name&gt;javax.jdo.option.ConnectionURL&lt;/name&gt;
+                &lt;value&gt;jdbc:mariadb://master1:3306/hive?createDatabaseIfNotExist=true&amp;amp;characterEncoding=UTF-8&lt;/value&gt;
+                &lt;description&gt;如果是mariadb：jdbc:mariadb://cda:3306/hive&lt;/description&gt;
+      &lt;/property&gt;
+      &lt;property&gt;
+                &lt;name&gt;javax.jdo.option.ConnectionDriverName&lt;/name&gt;
+                &lt;value&gt;org.mariadb.jdbc.Driver&lt;/value&gt;
+                &lt;description&gt;如果是mariadb：org.mariadb.jdbc.Driver&lt;/description&gt;
+      &lt;/property&gt;
+      &lt;property&gt;
+                &lt;name&gt;javax.jdo.option.ConnectionUserName&lt;/name&gt;
+                &lt;value&gt;root&lt;/value&gt;
+      &lt;/property&gt;
+      &lt;property&gt;
+                &lt;name&gt;javax.jdo.option.ConnectionPassword&lt;/name&gt;
+                &lt;value&gt;111123&lt;/value&gt;
+      &lt;/property&gt;
+
+      &lt;!-配置hiveserver2主机(这里最好是配置ip地址，以便于从Windows连接)-&gt;
+      &lt;property&gt;
+            &lt;name&gt;hive.server2.thrift.bind.host&lt;/name&gt;
+            &lt;value&gt;thrift://master1:9083&lt;/value&gt;
+            &lt;description&gt;Bind host on which to run the HiveServer2 Thrift service.&lt;/description&gt;
+      &lt;/property&gt;
+          &lt;property&gt;
+            &lt;name&gt;hive.server2.thrift.port&lt;/name&gt;
+            &lt;value&gt;10000&lt;/value&gt;
+            &lt;description&gt;监听的TCP端口号，默认是10000&lt;/description&gt;
+      &lt;/property&gt;
+      &lt;!-配置beeline远程客户端连接时的用户名和密码。这个用户名要在对应的hadoop的配置文件core-site.xml中也配置-&gt;
+      &lt;property&gt;
+            &lt;name&gt;hive.server2.thrift.client.user&lt;/name&gt;
+            &lt;value&gt;hadoopuser&lt;/value&gt;
+      &lt;/property&gt;
+      &lt;property&gt;
+            &lt;name&gt;hive.server2.thrift.client.password&lt;/name&gt;
+            &lt;value&gt;hadoopuser&lt;/value&gt;
+      &lt;/property&gt;
+
+      # 关闭元数据验证
+        &lt;property&gt;
+            &lt;name&gt;datanucleus.metadata.validate&lt;/name&gt;
+            &lt;value&gt;false&lt;/value&gt;
+        &lt;/property&gt;
+        # 关闭元数据存储模式验证
+        &lt;property&gt;
+            &lt;name&gt;hive.metastore.schema.verification&lt;/name&gt;
+            &lt;value&gt;false&lt;/value&gt;
+        &lt;/property&gt;
+        &lt;property&gt;
+            &lt;name&gt;datanucleus.schema.autoCreateAll&lt;/name&gt;
+            &lt;value&gt;ture&lt;/value&gt;
+        &lt;/property&gt;
+
+&lt;/configuration&gt;
+</code></pre></div></p>
+<ol>
+<li>
+<p>拷贝jdbc驱动
+       默认情况下, Hive的元数据保存在了内嵌的derby数据库里, 
+       但一般情况下生产环境使用MySQL来存放Hive元数据。
+       1) 将 mysql-connector-java-5.1.40.jar 放入 $HIVE_HOME/lib 下。（mysql jdbc驱动程序）</p>
+<p>注：如果使用的是mariadb数据库，则配置的驱动程序为：org.mariadb.jdbc.Driver
+       并且要将mariadb jdbc驱动拷贝到hive的lib目录下：例如 mariadb-java-client-2.2.6.jar</p>
+<h4 id="hivehdfs">三、为Hive创建HDFS目录<a class="headerlink" href="#hivehdfs" title="Permanent link">&para;</a></h4>
+<ol>
+<li>
+<p>必须先安装了Hadoop，并配置了HADOOP_HOME环境变量</p>
+</li>
+<li>
+<p>在Hive中创建表之前，需要在HDFS上创建目录/tmp/hive和/user/hive/warehouse，并给它们赋予写权限。
+   在HDFS中将它们设为chmod 777，然后才可以在Hive中创建表:
+    $ hdfs dfs -mkdir -p       /tmp/hive
+    $ hdfs dfs -mkdir -p       /user/hive/warehouse</p>
+<p>//用户组加写权限
+$ hdfs dfs -chmod -R 777   /tmp
+$ hdfs dfs -chmod -R 777   /user/hive/warehouse</p>
+</li>
+</ol>
+</li>
+</ol>
+<h4 id="_5">四、初始化<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code>// 执行初始化操作(会在mysql中创建hive数据库)
+    $ schematool -dbType mysql -initSchema
+
+    说明：如果是使用MySQL数据库，则需要先启动mysql服务器：
+$ cd /usr/local/mysql
+    $ sudo ./support-files/mysql.server start
+
+    执行成功后，可以查看MySQL中元数据库hive是否已经创建成功。
+</code></pre></div>
+
+<p>执行成功后，可以查看MySQL中元数据库hive是否已经创建成功。
+出现错误 ：Java.lana.NoSuchMethodError com.aoodle.common.base,Preconditions checkAroument/Zliava/ana /Strinc:liava/ang/Obiect)原因是同一类型的 jar 包有不同版本存在，系统无法决定使用哪一个。
+解决方法: 删除 hive_home/lib/中低版本的guava-19.0,jar包，将hadoop中的guava-27.0-jrejar复制到hive的lib目录下即可。
+rm /bigdata/hive-3.1.2/lib/guava-19.0-jre.jar
+cp ~/bigdatahadoop-3.2.4/share/hadoop/common/lib/guava-27.0-jre.jar /bigdata/hive-3.1.2/lib/</p>
+<h4 id="_6">五、运行<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h4>
+<p>1、启动HDFS集群和YARN集群
+    $ start-dfs.sh
+    $ start-yarn.sh
+或者用start-all.sh
+关闭用stop-all.sh</p>
+<p>2、启动Hive客户端：
+新建一个会话窗口运行,启动后台程序
+$ hive -service metastore
+另一个窗口中运行，执行前台服务
+$ hive  </p>
+<p>3、创建数据表：
+    查看当前数据库：
+    show databases;</p>
+<div class="codehilite"><pre><span></span><code>创建新的数据库：
+create database cda;
+
+打开数据库：
+use cda;
+
+创建数据表：
+CREATE TABLE sales( id int, product string, age int) row format delimited fields terminated by &#39;\t&#39;;
+
+查看数据表：
+show tables;
+
+    insert into t1 values (1,&quot;张三&quot;),(2,&quot;李四&quot;),(3,&quot;王老五&quot;);：
+</code></pre></div>
+
+<p>4、退出hive cli
+    $ exit;</p>
+<p>六、远程连接：</p>
+<ol>
+<li>配置$HADOOP_HOME/etc/hadoop/目录中如下的配置文件：</li>
+</ol>
+<p>在core-site.xml 添加如下配置：
+设置一个远程登录账号
+hadoopuser1 为用户名
+hadoopuser2 为密码</p>
+<blockquote>
+<div class="codehilite"><pre><span></span><code>   &lt;property&gt;
+        &lt;name&gt;hadoop.proxyuser.hadoopuser1.hosts&lt;/name&gt;
+        &lt;value&gt;*&lt;/value&gt;
+  &lt;/property&gt;
+  &lt;property&gt;
+        &lt;name&gt;hadoop.proxyuser.hadoopuser2.groups&lt;/name&gt;
+        &lt;value&gt;*&lt;/value&gt;
+  &lt;/property&gt;
+</code></pre></div>
+
+</blockquote>
+<ol>
+<li>配置hive_HOME/conf/hive-site.xml<blockquote>
+<div class="codehilite"><pre><span></span><code>  &lt;!-配置beeline远程客户端连接时的用户名和密码。这个用户名要在对应的hadoop的配置文件core-site.xml中也配置-&gt;
+  &lt;property&gt;
+        &lt;name&gt;hive.server2.thrift.client.user&lt;/name&gt;
+        &lt;value&gt;hadoopuser&lt;/value&gt;
+  &lt;/property&gt;
+  &lt;property&gt;
+        &lt;name&gt;hive.server2.thrift.client.password&lt;/name&gt;
+        &lt;value&gt;hadoopuser&lt;/value&gt;
+  &lt;/property&gt;
+</code></pre></div>
+
+</blockquote>
+</li>
+</ol>
+<p>在windows系统上安装
+JDK
+sqldevelop</p>
+<h2 id="_7">第三日<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<ul>
+<li>使用一个物价检测数据集，来练习Hive QL语言
+-[hduser@cda hive_data]$ head -5 pricewatch.csv
+-RECORDID,JCLB,JCMC,BQ,SQ,TB,HB
+-537B9A6E0C836F36E0505BCB8D2E3A3B,,椰菜,2.27,2.261,-0.067,0.004
+-537B9A6E0C846F36E0505BCB8D2E3A3B,,东北米,2.863,2.843,-0.067,0.007
+-537B9A6E0C856F36E0505BCB8D2E3A3B,,早籼米,3.08,3.044,0.219,0.012
+-537B9A6E0C866F36E0505BCB8D2E3A3B,,晚籼米,3.217,3.22,0.081,-0.001</li>
+</ul>
+<p>-[hduser@cda hive_data]$ tail -5 pricewatch.csv
+-7A9CCF598585A4A6E0505BCB8D2E67FF,蔬菜,菜心,6.926,5.679,0.271,0.219
+-7A9CCF598586A4A6E0505BCB8D2E67FF,蔬菜,生菜,5.621,3.973,0.168,0.415
+-7A9CCF598587A4A6E0505BCB8D2E67FF,蔬菜,大白菜,3.233,2.673,0.27,0.209
+-7A9CCF598588A4A6E0505BCB8D2E67FF,蔬菜,菠菜,8.547,7.966,-0.025,0.073
+-7A9CCF598589A4A6E0505BCB8D2E67FF,蔬菜,椰菜,3.168,2.83,0.082,0.1</p>
+<ul>
+<li>
+<p>创建Hive表
+create table pricewatch(
+recordid string,
+jclb string,
+jcmc string,
+bq decimal(10, 3),
+sq decimal(10, 3),
+tb decimal(10, 3),
+hb decimal(10, 3)
+)row format delimited
+fields terminated by ','
+tblproperties('skip.header.line.count'='1');</p>
+</li>
+<li>
+<p>加载数据文件到表中
+load data inpath '/home/hduser/data/hive_data/pricewatch.csv' into table pricewatch;</p>
+</li>
+<li>
+<p>测试
+select * from pricewatch limit 5;</p>
+</li>
+</ul>
+<p>-
+Snail
+- 简单查询
+- limit查询：限制返回的行数。
+select * from pricewatch limit 10;
+select * from pricewatch limit 10,5;</p>
+<ul>
+<li>条件查询</li>
+<li>
+<p>单条件
+select * from pricewatch where bq&gt;5.00;</p>
+</li>
+<li>
+<p>组合条件
+select * from pricewatch where bq&gt;5.00 and bq&lt;8.00;
+select * from pricewatch where bq&lt;=5.00 or bq&gt;=8.00;</p>
+</li>
+<li>
+<p>排序（默认是升序）
+select * from pricewatch where bq&gt;5.00 and bq&lt;8.00 order by bq;
+select * from pricewatch where bq&gt;5.00 and bq&lt;8.00 order by bq desc;</p>
+</li>
+<li>
+<p>null值比较：is null 和 is not null
+select * from pricewatch where jclb is null;
+select * from pricewatch where jclb is not null;</p>
+</li>
+</ul>
+<p>select * from pricewatch where jclb="";</p>
+<ul>
+<li>
+<p>查询检测类别（jclb）  - 去重 distinct
+select jclb from pricewatch;
+select distinct jclb from pricewatch;</p>
+</li>
+<li>
+<p>范围条件</p>
+</li>
+<li>in和not in</li>
+<li>
+<p>找出检测名称(jcmb)为“生菜”、“芹菜”和“菠菜”的商品
+select * from pricewatch where jcmc="生菜" or jcmc="芹菜" or jcmc="菠菜";
+select * from pricewatch where jcmc in ("生菜","芹菜","菠菜");</p>
+</li>
+<li>
+<p>找出检测名称(jcmb)不是“生菜”、“芹菜”和“菠菜”的商品</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pricewatch</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">jcmc</span><span class="o">&lt;&gt;</span><span class="ss">&quot;生菜&quot;</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">jcmc</span><span class="o">&lt;&gt;</span><span class="ss">&quot;芹菜&quot;</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">jcmc</span><span class="o">&lt;&gt;</span><span class="ss">&quot;菠菜&quot;</span><span class="p">;</span>
+<span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">pricewatch</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">jcmc</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;生菜&quot;</span><span class="p">,</span><span class="ss">&quot;芹菜&quot;</span><span class="p">,</span><span class="ss">&quot;菠菜&quot;</span><span class="p">);</span>
+</code></pre></div>
+<ul>
+<li>between..and...和not between...and...</li>
+<li>找出 本期价格在2.00-5.00之间 的商品(包不包括2.00？包不包括5.00?)
+select * from pricewatch where bq between 2.00 and 5.00;</li>
+<li>
+<p>找出 本期价格低于2.00或高于5.00之间 的商品
+select * from pricewatch where bq  not between 2.00 and 5.00;</p>
+</li>
+<li>
+<p>列值之间的运算</p>
+</li>
+<li>找出价格环比上涨的商品
+select * from pricewatch where bq&gt;sq;
+select * from pricewatch where hb&gt;0;
+Snail</li>
+<li>模糊查询: like, not like, rlike</li>
+<li>(1) like 和not like：两上匹配符号_和%。_表示任意单个字符；%表示任意数量的任意字符。</li>
+<li>(2) rlike：支持标准Java正则表达式符号。</li>
+<li>$：匹配结尾</li>
+<li>^：匹配开头</li>
+<li>.：匹配任意单个字符</li>
+<li>
+<p>表示数量的符号：*(前面的字符至少1个),  {m}(前面的字符要出现m次)</p>
+</li>
+<li>
+<p>找出所有检测名称以"米"字结尾的商品
+select * from pricewatch where jcmc like '%米';
+select * from pricewatch where jcmc rlike '米$';</p>
+</li>
+<li>
+<p>找出所有检测名称以”泰“字开头的商品
+select * from pricewatch where jcmc like '泰%';
+select * from pricewatch where jcmc rlike '^泰';</p>
+</li>
+<li>
+<p>找出所有检测名称以”花“字开头、以”油“字结尾的商品
+select * from pricewatch where jcmc like '花%油';
+select * from pricewatch where jcmc rlike '^花.*油$';</p>
+</li>
+<li>
+<p>找出所有检测名称以”米“或”油“字结尾的商品
+select * from pricewatch where jcmc rlike '[米油]$';</p>
+</li>
+<li>
+<p>找出所有检测名称为”xx菜“的商品
+select * from pricewatch where jcmc like '__菜';
+select * from pricewatch where jcmc rlike '^.{2}菜$';</p>
+</li>
+<li>
+<p>找出 价格高于8元 的大米
+select * from pricewatch where bq&gt;8.00 and jcmc like '%米';</p>
+</li>
+<li>
+<p>如何保存查询结果</p>
+</li>
+<li>有三种方式：</li>
+<li>1）保存在本地文件中；</li>
+<li>2）保存在HDFS文件中；</li>
+<li>
+<p>3）保存在另一个hive表中；</p>
+</li>
+<li>
+<p>1）保存在本地文件中：insert overwrite local directory ... select ...</p>
+</li>
+<li>
+<p>将查询结果保存到本地的一个csv文件中(导出的文件夹要事先不能存在)
+insert overwrite local directory '/home/hduser/data/result1'
+row format delimited fields terminated by ','
+select jcmc, jclb, bq, sq from pricewatch;</p>
+</li>
+<li>
+<p>2）保存在HDFS文件中：insert overwrite directory ... select ...
+insert overwrite directory '/data/result1'
+row format delimited fields terminated by ','
+select jcmc, jclb, bq, sq from pricewatch;</p>
+</li>
+<li>
+<p>3）保存在另一个hive表中。又分为两种情况：</p>
+</li>
+<li>当结果表不存在时：CTAS语法（create table xxx as select ....）
+create table procewatch_result as
+select jcmc, jclb, bq, sq from pricewatch where bq&lt;5.00;</li>
+</ul>
+<p>select * from procewatch_result;</p>
+<ul>
+<li>当结果表已经存在时：insert into ... select ...
+insert into procewatch_result
+select jcmc, jclb, bq, sq from pricewatch where bq&gt;15.00;</li>
+</ul>
+<p>select * from procewatch_result;
+樊博
+org.apache.hadoop.ipc.RemoteException(java.io.IOException): File /tmp/hadoop-yarn/staging/root/.staging/job_1682468625449_0007/libjars/taglibs-standard-impl-1.2.5.jar could only be written to 0 of the 1 minReplication nodes. There are 3 datanode(s) running and 3 node(s) are excluded in this operation.
+14:49
+Snail
+-Hive内置函数</p>
+<ul>
+<li>
+<p>查看Hive所支持的函数列表
+show functions;</p>
+</li>
+<li>
+<p>查看特定函数的帮助和用法(在sql developer中无效)</p>
+</li>
+</ul>
+<p>desc function split;
+desc function extended split;</p>
+<p>desc function to_date;</p>
+<ul>
+<li>字符串函数</li>
+<li>
+<p>length
+select length('cda_hive') as str_length;
+select jcmc, length(jcmc) as jcmc_length from pricewatch;</p>
+</li>
+<li>
+<p>concat(c1, c2, c3, ...)
+select concat('we ','love ','hive') str_concat;</p>
+</li>
+<li>
+<p>concat_ws(sep, c1, c2, c3, ...)</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code>select concat_ws(&#39;-&#39;, &#39;we&#39;,&#39;love&#39;,&#39;hive&#39;) str_concat;
+select concat_ws(&#39;-&#39;,jclb,jcmc) from pricewatch where jclb &lt;&gt; &quot;&quot; limit 5;
+</code></pre></div>
+<ul>
+<li>substr(str, start), substr(str, start, len)</li>
+<li>substring</li>
+</ul>
+<div class="highlight"><pre><span></span><code>select substr(&#39;abcde&#39;,3);
+select substr(&#39;abcde&#39;,3,2);
+select substr(&#39;abcde&#39;,-1);
+</code></pre></div>
+<ul>
+<li>
+<p>trim, ltrim, rtrim
+select trim('  abc  ');
+select ltrim('  abc  ');
+select rtrim('  abc  ');</p>
+</li>
+<li>
+<p>split：分割字符串
+select split('abtcdtef','t');</p>
+</li>
+<li>
+<p>regexp_replace：正则表达式替换函数</p>
+</li>
+<li>regexp_replace(string A, pattern_string B, string C)
+select regexp_replace('我喜欢和平，反对暴力和枪支','暴力|枪支','**');  - 中**队    中国军队</li>
+</ul>
+<p>select regexp_replace('135a-123b4-c5678','\D','');
+select regexp_replace('135a-123b4-c5678','[^0-9]','');</p>
+<ul>
+<li>regexp_extract：正则表达式解析函数   group 返回数组[整个字符串,(),()]</li>
+<li>regexp_extract(string subject, string pattern, int index)
+-select regexp_extract('foothebar','foo(.<em>)(bar)', 2);   - the     [foothebar,group1, group2, ...]
+-select regexp_extract('foothebar','foo(.</em>?)(bar)',1);   - the
+-select regexp_extract('foothebar','foo(.<em>?)(bar)',2);   - bar
+select regexp_extract('foothebar','foo(.</em>?)(bar)',0);   - foothebar
+Snail</li>
+<li>parse_url：URL解析函数   <a href="https://www.baidu.com/s?tn=baidu&amp;wd=cda">https://www.baidu.com/s?tn=baidu&amp;wd=cda</a></li>
+<li>
+<p>https://   <a href="http://www.baidu.com:80">www.baidu.com:80</a>   /s ? tn=baidu &amp; wd=cda
+select parse_url('<a href="https://cwiki.apache.org/confluence/display/Hive','PROTOCOL">https://cwiki.apache.org/confluence/display/Hive','PROTOCOL</a>');
+select parse_url('<a href="https://cwiki.apache.org/confluence/display/Hive?k1=v1&amp;k2=v2','PROTOCOL">https://cwiki.apache.org/confluence/display/Hive?k1=v1&amp;k2=v2','PROTOCOL</a>');
+select parse_url('<a href="https://cwiki.apache.org/confluence/display/Hive?k1=v1&amp;k2=v2','HOST">https://cwiki.apache.org/confluence/display/Hive?k1=v1&amp;k2=v2','HOST</a>');
+select parse_url('<a href="https://cwiki.apache.org/confluence/display/Hive?k1=v1&amp;k2=v2','PATH">https://cwiki.apache.org/confluence/display/Hive?k1=v1&amp;k2=v2','PATH</a>');
+select parse_url('<a href="https://cwiki.apache.org/confluence/display/Hive?k1=v1&amp;k2=v2','QUERY">https://cwiki.apache.org/confluence/display/Hive?k1=v1&amp;k2=v2','QUERY</a>');
+select parse_url("<a href="https://cwiki.apache.org/confluence/display/Hive?k1=v1&amp;k2=v2&quot;,'QUERY','k1">https://cwiki.apache.org/confluence/display/Hive?k1=v1&amp;k2=v2",'QUERY','k1</a>');</p>
+</li>
+<li>
+<p>get_json_object：JSON解析函数  </p>
+</li>
+<li>json：网络数据交换的轻量格式。它只有两种类型：json对象或json数组   </li>
+<li>json对象：'{"key1":"val1","key2":"val2",....}'  </li>
+<li>json数组：'[{"k1":"v1","k2":"v2",...},{},...]'</li>
+<li>json数据的所有key，必须是字符串
+-'{</li>
+<li>"store":{</li>
+<li>"fruit": [{"weight":8,"type":"apple"},{"weight":9,"type":"pear"}],</li>
+<li>"bicycle":{"price":19.95,"color":"red"}</li>
+<li>},</li>
+<li>"email": "<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#97;&#97;&#97;&#64;&#49;&#54;&#51;&#46;&#99;&#111;&#109;">&#97;&#97;&#97;&#64;&#49;&#54;&#51;&#46;&#99;&#111;&#109;</a>",</li>
+<li>
+<p>"owner": "aaa"
+-}'</p>
+</li>
+<li>
+<p>取单个值
+select get_json_object('{
+"store":{
+"fruit": [{"weight":8,"type":"apple"},{"weight":9,"type":"pear"}],
+"bicycle":{"price":19.95,"color":"red"}
+},
+"email": "<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#97;&#97;&#97;&#64;&#49;&#54;&#51;&#46;&#99;&#111;&#109;">&#97;&#97;&#97;&#64;&#49;&#54;&#51;&#46;&#99;&#111;&#109;</a>",
+"owner": "aaa"
+}', '$.email');</p>
+</li>
+<li>
+<p>取嵌套值
+select get_json_object('{
+"store":{
+"fruit": [{"weight":8,"type":"apple"},{"weight":9,"type":"pear"}],
+"bicycle":{"price":19.95,"color":"red"}
+},
+"email": "<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#97;&#97;&#97;&#64;&#49;&#54;&#51;&#46;&#99;&#111;&#109;">&#97;&#97;&#97;&#64;&#49;&#54;&#51;&#46;&#99;&#111;&#109;</a>",
+"owner": "aaa"
+}', '$.store.bicycle.price');</p>
+</li>
+<li>
+<p>取数组值
+select get_json_object('{
+"store":{
+"fruit": [{"weight":8,"type":"apple"},{"weight":9,"type":"pear"}],
+"bicycle":{"price":19.95,"color":"red"}
+},
+"email": "<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#97;&#97;&#97;&#64;&#49;&#54;&#51;&#46;&#99;&#111;&#109;">&#97;&#97;&#97;&#64;&#49;&#54;&#51;&#46;&#99;&#111;&#109;</a>",
+"owner": "aaa"
+}', '$.store.fruit[0].type');
+Snail</p>
+</li>
+<li>
+<p>数学函数</p>
+</li>
+<li>round: 四舍五入</li>
+</ul>
+<p>select round(46.5);
+select round(46.499);
+select round(12.3456,2);</p>
+<ul>
+<li>ceil：向上取整</li>
+</ul>
+<p>select ceil(87.2);
+select ceil(-87.2);</p>
+<ul>
+<li>floor：向下整数</li>
+</ul>
+<p>select floor(2.89);
+select floor(-2.09);</p>
+<ul>
+<li>
+<p>cast：类型转换函数</p>
+</li>
+<li>
+<p>将数值字符串转换为数值类型
+  select cast('3.56' as double);
+  select cast('2022-09-25' as date);
+  Snail</p>
+</li>
+<li>日期函数</li>
+<li>
+<p>to_date()：提取日期部分
+  select to_date('2022-09-25 16:32:45') as sub_date;</p>
+</li>
+<li>
+<p>year(), month(), day(), hour()
+select year('2022-09-25 16:32:45'),month('2022-09-25 16:32:45');</p>
+</li>
+<li>
+<p>current_date()</p>
+</li>
+</ul>
+<p>select current_date();</p>
+<ul>
+<li>date_format()：日期格式化函数</li>
+</ul>
+<p>select date_format('2022-09-25 16:32:45', 'MM-dd');
+select date_format('2022-09-25 16:32:45', 'MM/dd/yyyy');
+select date_format('2022-09-25 16:32:45', 'yyyy年MM月dd日 HH点mm分ss秒');</p>
+<ul>
+<li>unix_timestamp()：将一个日期转换为unix时间戳(10-s, 13-ms)  字符串-&gt;长整数</li>
+</ul>
+<p>select unix_timestamp('2022-09-25 16:32:45');
+select unix_timestamp('12/09/2022','dd/MM/yyyy');</p>
+<ul>
+<li>
+<p>from_unixtime(): 长整数-&gt;字符串
+select from_unixtime(1664094765);
+select from_unixtime(1664094765,'yyyy/MM/dd');</p>
+</li>
+<li>
+<p>非标准日期的转换   '20220618' -&gt; 长整数 -&gt; 格式字符串
+select from_unixtime(unix_timestamp('20220618','yyyyMMdd'), 'yyyy-MM-dd');</p>
+</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.8fd75fb4.min.js"></script>
+      
+    
+  </body>
+</html>
